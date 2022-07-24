@@ -7,14 +7,13 @@ public class Meter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-
     int id;
 
     String name;
 
     @ManyToOne
-    @JoinColumn(name = "metes_type_id")
-    private MetersType metersType;
+    @JoinColumn(name = "meter_type_id")
+    private MeterType meterType;
 
 
 //  Constructors
@@ -29,8 +28,18 @@ public class Meter {
         this.name = name;
     }
 
+    public Meter(int id, String name, MeterType meterType) {
+        this.id = id;
+        this.name = name;
+        this.meterType = meterType;
+    }
 
-//Getters & Setters
+    public Meter(String name, MeterType meterType) {
+        this.name = name;
+        this.meterType = meterType;
+    }
+
+    //Getters & Setters
     public int getId() {
         return id;
     }
@@ -47,19 +56,12 @@ public class Meter {
         this.name = name;
     }
 
-    public MetersType getMetesType() {
-        return metersType;
+    public MeterType getMetesType() {
+        return meterType;
     }
 
-    public void setMetesType(MetersType metersType) {
-        this.metersType = metersType;
+    public void setMetesType(MeterType meterType) {
+        this.meterType = meterType;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
 }

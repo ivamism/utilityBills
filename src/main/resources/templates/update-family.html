@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <form action="update-family" method="post" th:object="${family}">
+        <input type="hidden" th:field="*{id}">
+        Фамилия <input type="text" name="name">
+        <br>
+        Количество членов семьи <input type="number" name="familyMembersQuantity">
+        <br>
+        Процент участия <input type="number" name="share">
+        <br>
+        Общий <input type="checkbox" name="commonUser">
+        <br>
+        Активный <input type="checkbox" name="active">
+        <br>
+        <br>
+        <button class="btn btn-success" type="submit">Ok</button>
+    </form>
+</div>
+</body>
+</html>

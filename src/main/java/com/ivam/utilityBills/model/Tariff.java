@@ -1,32 +1,37 @@
 package com.ivam.utilityBills.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
+@Table (name = "tariffs")
 
-public class Tariffs {
+public class Tariff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
 
     private String name;
     private double value;
 
 
-    public Tariffs() {
+    public Tariff() {
     }
 
-    public Tariffs(int id) {
+    public Tariff(int id) {
         this.id = id;
     }
 
-    public Tariffs(String name) {
+//    public Tariff(String name) {
+//        this.name = name;
+//    }
+
+    public Tariff(String name, double value) {
         this.name = name;
+        this.value = value;
     }
 
-    public Tariffs(String name, double value) {
+    public Tariff(int id, String name, double value) {
+        this.id = id;
         this.name = name;
         this.value = value;
     }
@@ -57,7 +62,7 @@ public class Tariffs {
 
     @Override
     public String toString() {
-        return "Tariffs{" +
+        return "Tariff{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", value=" + value +
