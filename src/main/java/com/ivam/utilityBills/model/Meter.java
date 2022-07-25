@@ -12,15 +12,15 @@ public class Meter {
     String name;
 
     @ManyToOne
-    @JoinColumn(name = "meter_type_id")
-    private MeterType meterType;
+    @JoinColumn(name = "meter_type.id")
+    private MeterType metertype;
 
-    public MeterType getMeterType() {
-        return meterType;
+    public MeterType getMetertype() {
+        return metertype;
     }
 
-    public void setMeterType(MeterType meterType) {
-        this.meterType = meterType;
+    public void setMetertype(MeterType metertype) {
+        this.metertype = metertype;
     }
 //    @ManyToOne
 //    @JoinColumn(name = "meter_type.id")
@@ -39,15 +39,15 @@ public class Meter {
         this.name = name;
     }
 
-    public Meter(int id, String name, MeterType meterType) {
+    public Meter(int id, String name, MeterType metertype) {
         this.id = id;
         this.name = name;
-        this.meterType = meterType;
+        this.metertype = metertype;
     }
 
-    public Meter(String name, MeterType meterType) {
+    public Meter(String name, MeterType metertype) {
         this.name = name;
-        this.meterType = meterType;
+        this.metertype = metertype;
     }
 
     public Meter(int id, String name) {
@@ -73,11 +73,11 @@ public class Meter {
     }
 
     public MeterType getMetesType() {
-        return meterType;
+        return metertype;
     }
 
     public void setMetesType(MeterType meterType) {
-        this.meterType = meterType;
+        this.metertype = meterType;
     }
 
 }

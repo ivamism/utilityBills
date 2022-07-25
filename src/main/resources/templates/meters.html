@@ -25,11 +25,9 @@
             <th>Удаление</th>
 
         </tr>
-        <tr th:each="meter : ${meters}">
+        <tr th:each="meter : ${meterlist}">
             <td th:text="${meter.id}"></td>
             <td th:text="${meter.name}"></td>
-
-<!--            <td th:text="${meter.metertypes.name}"></td>-->
             <td th:text="${meter.metertype.name}"></td>
 
             <td>

@@ -18,10 +18,7 @@ import java.util.List;
 @Controller
 public class MeterTypeController {
 
-    @Autowired
-    MeterRepository meterRepository;
-
-    @Autowired
+       @Autowired
     MeterTypeRepository meterTypeRepository;
 
     @Autowired

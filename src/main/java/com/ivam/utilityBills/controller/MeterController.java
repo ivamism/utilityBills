@@ -26,8 +26,8 @@ public class MeterController {
 
     @GetMapping("/meters")
     public String findAll(Model model) {
-        List<Meter> meters = meterRepository.findAll();
-        model.addAttribute("meters", meters);
+        List<Meter> meterList = meterRepository.findAll();
+        model.addAttribute("meterlist", meterList);
         return "meters";
     }
 
@@ -51,6 +51,7 @@ public class MeterController {
     @GetMapping("/update-meter")
     public String update(@RequestParam int id, Model model) {
         Meter meter = meterRepository.findById(id).get();
+        model.addAttribute("mitertype", meterTypeRepository.findAll());
         model.addAttribute("meter", meter);
         return "update-meter";
     }

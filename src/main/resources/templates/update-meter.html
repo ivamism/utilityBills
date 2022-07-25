@@ -13,6 +13,11 @@
         <br>
 
         Тип
+        <select name="tariffs">
+            <th:block th:each="tariff : ${tariff}">
+                <option th:value="${tariff.id}" th:text="${tariff.name}" />
+            </th:block>
+        </select>
 <!--        <select name="city">-->
 <!--            <th:block th:each="city : ${cities}">-->
 <!--                <option th:value="${city.id}" th:text="${city.name}"/>-->
