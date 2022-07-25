@@ -2,6 +2,7 @@ package com.ivam.utilityBills.controller;
 
 
 import com.ivam.utilityBills.model.Meter;
+import com.ivam.utilityBills.model.MeterType;
 import com.ivam.utilityBills.repository.FamilyRepository;
 import com.ivam.utilityBills.repository.MeterRepository;
 import com.ivam.utilityBills.repository.MeterTypeRepository;
@@ -38,7 +39,9 @@ public class MeterController {
     }
 
     @GetMapping("/add-meter")
-    public String add() {
+    public String add(Model model) {
+        List<MeterType> typeList = meterTypeRepository.findAll();
+        model.addAttribute("typelist", typeList);
         return "add-meter";
     }
 
@@ -51,7 +54,8 @@ public class MeterController {
     @GetMapping("/update-meter")
     public String update(@RequestParam int id, Model model) {
         Meter meter = meterRepository.findById(id).get();
-        model.addAttribute("mitertype", meterTypeRepository.findAll());
+        List<MeterType> typeList = meterTypeRepository.findAll();
+        model.addAttribute("typelist", typeList);
         model.addAttribute("meter", meter);
         return "update-meter";
     }

@@ -22,10 +22,6 @@ public class Meter {
     public void setMetertype(MeterType metertype) {
         this.metertype = metertype;
     }
-//    @ManyToOne
-//    @JoinColumn(name = "meter_type.id")
-//    private MeterType meterType;
-
 
 //  Constructors
     public Meter() {

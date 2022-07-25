@@ -13,16 +13,12 @@
         <br>
 
         Тип
-        <select name="tariffs">
-            <th:block th:each="tariff : ${tariff}">
-                <option th:value="${tariff.id}" th:text="${tariff.name}" />
+        <select name="metertype">
+            <th:block th:each="metertype : ${typelist}">
+                <option th:value="${metertype.id}" th:text="${metertype.name}" />
             </th:block>
         </select>
-<!--        <select name="city">-->
-<!--            <th:block th:each="city : ${cities}">-->
-<!--                <option th:value="${city.id}" th:text="${city.name}"/>-->
-<!--            </th:block>-->
-<!--        </select>-->
+
         <br>
         <br>
         <button class="btn btn-success" type="submit">OK</button>

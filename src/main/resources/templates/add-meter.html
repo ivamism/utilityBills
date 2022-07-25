@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Добавить счетчик</title>
@@ -10,7 +10,12 @@
     <form action="add-meter" method="post">
         Название <input type="text" name="name">
         <br>
-<!--        Тип <input type="number" name="familyMembersQuantity">-->
+        Тип
+        <select name="metertype">
+            <th:block th:each="metertype : ${typelist}">
+                <option th:value="${metertype.id}" th:text="${metertype.name}" />
+            </th:block>
+        </select>
 
         <br>
         <br>
