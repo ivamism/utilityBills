@@ -29,8 +29,7 @@
         <tr th:each="type : ${types}">
             <td th:text="${type.id}"></td>
             <td th:text="${type.name}"></td>
-            <td th:text="${type.tariff}"></td>
-<!--            <td th:text="${type.tariffs.name}"></td>-->
+            <td th:text="${type.tariffs.name}"></td>
 
             <td>
                 <a th:href="@{update-metertype(id=${type.id})}">Редактировать</a>

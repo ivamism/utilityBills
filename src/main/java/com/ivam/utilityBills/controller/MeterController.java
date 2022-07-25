@@ -17,8 +17,6 @@ import java.util.List;
 
 @Controller
 public class MeterController {
-    @Autowired
-    FamilyRepository familyRepository;
 
     @Autowired
     MeterRepository meterRepository;

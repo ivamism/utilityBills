@@ -11,8 +11,10 @@ public class MeterType {
 
    String name;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "tariff_id", insertable = false, updatable = false)
+
+
+    @OneToOne
+    @JoinColumn(name = "tariff.id")
     private Tariff tariff;
 
     public Tariff getTariff() {

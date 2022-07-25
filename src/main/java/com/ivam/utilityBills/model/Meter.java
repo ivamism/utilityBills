@@ -15,6 +15,17 @@ public class Meter {
     @JoinColumn(name = "meter_type_id")
     private MeterType meterType;
 
+    public MeterType getMeterType() {
+        return meterType;
+    }
+
+    public void setMeterType(MeterType meterType) {
+        this.meterType = meterType;
+    }
+//    @ManyToOne
+//    @JoinColumn(name = "meter_type.id")
+//    private MeterType meterType;
+
 
 //  Constructors
     public Meter() {
@@ -37,6 +48,11 @@ public class Meter {
     public Meter(String name, MeterType meterType) {
         this.name = name;
         this.meterType = meterType;
+    }
+
+    public Meter(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     //Getters & Setters

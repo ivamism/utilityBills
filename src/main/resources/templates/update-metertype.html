@@ -12,11 +12,17 @@
         Тип <input type="text" name="name" th:field="*{name}">
         <br>
         Тариф
-        <select name="tariff">
+        <select name="tariffs">
             <th:block th:each="tariff : ${tariff}">
-                <option th:value="${tariff.id}" th:text="${tariff.name}"/>
+                <option th:value="${tariff.id}" th:text="${tariff.name}" />
             </th:block>
         </select>
+
+<!--        <select name="city">-->
+<!--            <th:block th:each="city : ${cities}">-->
+<!--                <option th:value="${city.id}" th:text="${city.name}"/>-->
+<!--            </th:block>-->
+<!--        </select>-->
         <br>
         <br>
         <button class="btn btn-success" type="submit">OK</button>

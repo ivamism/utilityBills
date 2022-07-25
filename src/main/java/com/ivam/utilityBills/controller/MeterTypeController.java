@@ -61,6 +61,7 @@ public class MeterTypeController {
         return "update-metertype";
     }
 
+
     @PostMapping("/update-metertype")
     public String update(@ModelAttribute MeterType type) {
         meterTypeRepository.save(type);

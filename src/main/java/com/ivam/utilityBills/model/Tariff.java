@@ -17,18 +17,23 @@ public class Tariff {
     public Tariff() {
     }
 
-    public Tariff(int id) {
-        this.id = id;
-    }
+//    public Tariff(int id) {
+//        this.id = id;
+//    }
 
 //    public Tariff(String name) {
 //        this.name = name;
 //    }
 
-    public Tariff(String name, double value) {
-        this.name = name;
-        this.value = value;
-    }
+//    public Tariff(int id, String name) {
+//        this.id = id;
+//        this.name = name;
+//    }
+//
+//    public Tariff(String name, double value) {
+//        this.name = name;
+//        this.value = value;
+//    }
 
     public Tariff(int id, String name, double value) {
         this.id = id;

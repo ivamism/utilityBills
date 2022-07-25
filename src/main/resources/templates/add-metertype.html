@@ -11,7 +11,7 @@
         Название <input type="text" name="name">
         <br>
         Тариф
-        <select name="tariff">
+        <select name="tariffs">
             <th:block th:each="tariff : ${tariff}">
                 <option th:value="${tariff.id}" th:text="${tariff.name}"/>
             </th:block>
