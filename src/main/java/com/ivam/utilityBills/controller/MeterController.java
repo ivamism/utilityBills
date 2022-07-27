@@ -29,7 +29,7 @@ public class MeterController {
     public String findAll(Model model) {
         List<Meter> meterList = meterRepository.findAll();
         model.addAttribute("meterlist", meterList);
-        return "meters";
+        return "meters/meters";
     }
 
     @GetMapping("/delete-meter")
@@ -42,7 +42,7 @@ public class MeterController {
     public String add(Model model) {
         List<MeterType> typeList = meterTypeRepository.findAll();
         model.addAttribute("typelist", typeList);
-        return "add-meter";
+        return "meters/add-meter";
     }
 
     @PostMapping("/add-meter")
@@ -57,7 +57,7 @@ public class MeterController {
         List<MeterType> typeList = meterTypeRepository.findAll();
         model.addAttribute("typelist", typeList);
         model.addAttribute("meter", meter);
-        return "update-meter";
+        return "meters/update-meter";
     }
 
     @PostMapping("/update-meter")
