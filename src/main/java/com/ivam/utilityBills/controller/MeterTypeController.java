@@ -28,7 +28,7 @@ public class MeterTypeController {
     public String findAll(Model model) {
         List<MeterType> types = meterTypeRepository.findAll();
         model.addAttribute("types", types);
-        return "metertypes";
+        return "metertypes/metertypes";
     }
 
 
@@ -41,7 +41,7 @@ public class MeterTypeController {
     @GetMapping("/add-metertype")
     public String add(Model model) {
         model.addAttribute("tariff", tariffRepository.findAll());
-        return "add-metertype";
+        return "metertypes/add-metertype";
     }
 
     @PostMapping("/add-metertype")
@@ -55,7 +55,7 @@ public class MeterTypeController {
         MeterType type = meterTypeRepository.findById(id).get();
         model.addAttribute("tariff", tariffRepository.findAll());
         model.addAttribute("type", type);
-        return "update-metertype";
+        return "metertypes/update-metertype";
     }
 
 
