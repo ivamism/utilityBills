@@ -17,11 +17,12 @@
     <a href="add-family">Добавить новую семью</a>
     <br>
     <br>
-    <table class="table table-striped">
+    <table class="table table-hover">
+<!--        <table class="table table-striped">-->
         <tr>
             <th>id</th>
             <th>Семья</th>
-            <th>Количество проживающих</th>
+<!--            <th>Количество проживающих</th>-->
             <th>Процент участия</th>
             <th>Общий</th>
             <th>Активный</th>
@@ -32,7 +33,7 @@
         <tr th:each="family : ${familyList}">
             <td th:text="${family.id}"></td>
             <td th:text="${family.name}"></td>
-            <td th:text="${family.familyMembersQuantity}"></td>
+<!--            <td th:text="${family.familyMembersQuantity}"></td>-->
             <td th:text="${family.share}"></td>
             <td th:text="${family.commonUser}"></td>
             <td th:text="${family.active}"></td>

@@ -1,6 +1,7 @@
 package com.ivam.utilityBills.controller;
 
 
+import com.ivam.utilityBills.model.Family;
 import com.ivam.utilityBills.model.Meter;
 import com.ivam.utilityBills.model.MeterType;
 import com.ivam.utilityBills.repository.FamilyRepository;
@@ -23,6 +24,8 @@ public class MeterController {
     MeterRepository meterRepository;
     @Autowired
     MeterTypeRepository meterTypeRepository;
+    @Autowired
+    FamilyRepository familyRepository;
 
 
     @GetMapping("/meters")
@@ -41,7 +44,9 @@ public class MeterController {
     @GetMapping("/add-meter")
     public String add(Model model) {
         List<MeterType> typeList = meterTypeRepository.findAll();
+        List<Family> ownersList = familyRepository.findAll();
         model.addAttribute("typelist", typeList);
+        model.addAttribute("ownerslist", ownersList);
         return "meters/add-meter";
     }
 
@@ -55,7 +60,9 @@ public class MeterController {
     public String update(@RequestParam int id, Model model) {
         Meter meter = meterRepository.findById(id).get();
         List<MeterType> typeList = meterTypeRepository.findAll();
+        List<Family> ownersList = familyRepository.findAll();
         model.addAttribute("typelist", typeList);
+        model.addAttribute("ownerslist", ownersList);
         model.addAttribute("meter", meter);
         return "meters/update-meter";
     }

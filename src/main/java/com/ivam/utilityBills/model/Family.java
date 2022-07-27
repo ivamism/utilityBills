@@ -13,13 +13,13 @@ public class Family {
     private boolean isCommonUser;
     private boolean isActive;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "meter_id", insertable = false, updatable = false)
-    Meter gasMeter;
-
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "meter_id", insertable = false, updatable = false)
-    Meter electricityMeter;
+//    @ManyToOne(cascade = {CascadeType.ALL})
+//    @JoinColumn(name = "meter_id", insertable = false, updatable = false)
+//    Meter gasMeter;
+//
+//    @ManyToOne(cascade = {CascadeType.ALL})
+//    @JoinColumn(name = "meter_id", insertable = false, updatable = false)
+//    Meter electricityMeter;
 
 
     //  Constructors
@@ -45,7 +45,7 @@ public class Family {
         this.share = share;
         this.isCommonUser = isCommonUser;
         this.isActive = isActive;
-            }
+    }
 
     public Family(int id, String name, int familyMembersQuantity, int share, boolean isCommonUser, boolean isActive) {
         this.id = id;
@@ -56,26 +56,7 @@ public class Family {
         this.isActive = isActive;
     }
 
-    public Family(int id, String name, int familyMembersQuantity, int share, boolean isCommonUser, boolean isActive, Meter gasMeter, Meter electricityMeter) {
-        this.id = id;
-        this.name = name;
-        this.familyMembersQuantity = familyMembersQuantity;
-        this.share = share;
-        this.isCommonUser = isCommonUser;
-        this.isActive = isActive;
-        this.gasMeter = gasMeter;
-        this.electricityMeter = electricityMeter;
-    }
 
-    public Family(String name, int familyMembersQuantity, int share, boolean isCommonUser, boolean isActive, Meter gasMeter, Meter electricityMeter) {
-        this.name = name;
-        this.familyMembersQuantity = familyMembersQuantity;
-        this.share = share;
-        this.isCommonUser = isCommonUser;
-        this.isActive = isActive;
-        this.gasMeter = gasMeter;
-        this.electricityMeter = electricityMeter;
-    }
     //Getters & Setters
 
 
@@ -127,35 +108,22 @@ public class Family {
         isActive = active;
     }
 
-    public Meter getGasMeter() {
-        return gasMeter;
-    }
+//    public Meter getGasMeter() {
+//        return gasMeter;
+//    }
+//
+//    public void setGasMeter(Meter gasMeter) {
+//        this.gasMeter = gasMeter;
+//    }
+//
+//    public Meter getElectricityMeter() {
+//        return electricityMeter;
+//    }
+//
+//    public void setElectricityMeter(Meter electricityMeter) {
+//        this.electricityMeter = electricityMeter;
+//    }
 
-    public void setGasMeter(Meter gasMeter) {
-        this.gasMeter = gasMeter;
-    }
-
-    public Meter getElectricityMeter() {
-        return electricityMeter;
-    }
-
-    public void setElectricityMeter(Meter electricityMeter) {
-        this.electricityMeter = electricityMeter;
-    }
-
-    @Override
-    public String toString() {
-        return "Family{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", familyMembersQuantity=" + familyMembersQuantity +
-                ", share=" + share +
-                ", isCommonUser=" + isCommonUser +
-                ", isActive=" + isActive +
-                ", gasMeter=" + gasMeter +
-                ", electricityMeter=" + electricityMeter +
-                '}';
-    }
 }
 
 

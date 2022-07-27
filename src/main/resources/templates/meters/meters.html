@@ -21,6 +21,7 @@
             <th>id</th>
             <th>Название</th>
             <th>Тип</th>
+            <th>Владелец</th>
             <th>Редактирование</th>
             <th>Удаление</th>
 
@@ -29,6 +30,8 @@
             <td th:text="${meter.id}"></td>
             <td th:text="${meter.name}"></td>
             <td th:text="${meter.metertype.name}"></td>
+            <td th:text="${meter.owner.name}"></td>
+
 
             <td>
                 <a th:href="@{update-meter(id=${meter.id})}">Редактировать</a>

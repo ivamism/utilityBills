@@ -18,6 +18,14 @@
                 <option th:value="${metertype.id}" th:text="${metertype.name}" />
             </th:block>
         </select>
+        <br>
+
+        Владелец
+        <select name="owner">
+            <th:block th:each="owner : ${ownerslist}">
+                <option th:value="${owner.id}" th:text="${owner.name}" />
+            </th:block>
+        </select>
 
         <br>
         <br>

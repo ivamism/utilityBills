@@ -15,13 +15,11 @@ public class Meter {
     @JoinColumn(name = "meter_type.id")
     private MeterType metertype;
 
-    public MeterType getMetertype() {
-        return metertype;
-    }
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    Family owner;
 
-    public void setMetertype(MeterType metertype) {
-        this.metertype = metertype;
-    }
+
 
 //  Constructors
     public Meter() {
@@ -51,7 +49,20 @@ public class Meter {
         this.name = name;
     }
 
+    public Meter(int id, String name, MeterType metertype, Family owner) {
+        this.id = id;
+        this.name = name;
+        this.metertype = metertype;
+        this.owner = owner;
+    }
+
+    public Meter(String name, MeterType metertype, Family owner) {
+        this.name = name;
+        this.metertype = metertype;
+        this.owner = owner;
+    }
     //Getters & Setters
+
     public int getId() {
         return id;
     }
@@ -68,12 +79,19 @@ public class Meter {
         this.name = name;
     }
 
-    public MeterType getMetesType() {
+    public MeterType getMetertype() {
         return metertype;
     }
 
-    public void setMetesType(MeterType meterType) {
-        this.metertype = meterType;
+    public void setMetertype(MeterType metertype) {
+        this.metertype = metertype;
     }
 
+    public Family getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Family owner) {
+        this.owner = owner;
+    }
 }
