@@ -27,7 +27,7 @@ public class FamilyController {
     public String findAll(Model model) {
         List<Family> families = familyRepository.findAll();
         model.addAttribute("familyList", families);
-        return "familyList";
+        return "familyList/familylist";
     }
 
     @GetMapping("/delete-family")
@@ -38,7 +38,7 @@ public class FamilyController {
 
     @GetMapping("/add-family")
     public String add() {
-        return "add-family";
+        return "familylist/add-family";
     }
 
     @PostMapping("/add-family")
@@ -51,7 +51,7 @@ public class FamilyController {
     public String update(@RequestParam int id, Model model) {
         Family family = familyRepository.findById(id).get();
         model.addAttribute("family", family);
-        return "update-family";
+        return "familylist/update-family";
     }
 
     @PostMapping("/update-family")
