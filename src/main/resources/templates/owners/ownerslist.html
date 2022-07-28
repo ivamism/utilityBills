@@ -8,20 +8,20 @@
 </head>
 <body>
 <div class="container">
-    <a>Семьи</a>
+    <a>Владельцы</a>
     <a href="meters">Счетчики</a>
     <a href="metertypes">Типы счетчикиков</a>
     <a href="tariffs">Тарифы</a>
 
     <hr>
-    <a href="add-family">Добавить новую семью</a>
+    <a href="add-owner">Добавить нового владельца</a>
     <br>
     <br>
     <table class="table table-hover">
 <!--        <table class="table table-striped">-->
         <tr>
             <th>id</th>
-            <th>Семья</th>
+            <th>Владелец</th>
 <!--            <th>Количество проживающих</th>-->
             <th>Процент участия</th>
             <th>Общий</th>
@@ -30,21 +30,19 @@
             <th>Редактирование</th>
             <th>Удаление</th>
         </tr>
-        <tr th:each="family : ${familyList}">
-            <td th:text="${family.id}"></td>
-            <td th:text="${family.name}"></td>
-<!--            <td th:text="${family.familyMembersQuantity}"></td>-->
-            <td th:text="${family.share}"></td>
-            <td th:text="${family.commonUser}"></td>
-            <td th:text="${family.active}"></td>
-            <!--                <td th:text="${family.gasmeter.name}"></td>-->
-            <!--                <td th:text="${family.electricitymeter.name}"></td>-->
+        <tr th:each="owner : ${ownerslist}">
+            <td th:text="${owner.id}"></td>
+            <td th:text="${owner.name}"></td>
+<!--            <td th:text="${owner.registeredQuantity}"></td>-->
+            <td th:text="${owner.share}"></td>
+            <td th:text="${owner.commonUser}"></td>
+            <td th:text="${owner.active}"></td>
 
             <td>
-                <a th:href="@{update-family(id=${family.id})}">Редактировать</a>
+                <a th:href="@{update-owner(id=${owner.id})}">Редактировать</a>
             </td>
             <td>
-                <a class="text-danger" th:href="@{delete-family(id=${family.id})}">Удалить</a>
+                <a class="text-danger" th:href="@{delete-owners(id=${owner.id})}">Удалить</a>
             </td>
         </tr>
     </table>

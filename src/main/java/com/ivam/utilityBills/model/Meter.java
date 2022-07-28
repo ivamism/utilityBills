@@ -17,7 +17,7 @@ public class Meter {
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    Family owner;
+    Owners owner;
 
 
 
@@ -49,14 +49,14 @@ public class Meter {
         this.name = name;
     }
 
-    public Meter(int id, String name, MeterType metertype, Family owner) {
+    public Meter(int id, String name, MeterType metertype, Owners owner) {
         this.id = id;
         this.name = name;
         this.metertype = metertype;
         this.owner = owner;
     }
 
-    public Meter(String name, MeterType metertype, Family owner) {
+    public Meter(String name, MeterType metertype, Owners owner) {
         this.name = name;
         this.metertype = metertype;
         this.owner = owner;
@@ -87,11 +87,11 @@ public class Meter {
         this.metertype = metertype;
     }
 
-    public Family getOwner() {
+    public Owners getOwner() {
         return owner;
     }
 
-    public void setOwner(Family owner) {
+    public void setOwner(Owners owner) {
         this.owner = owner;
     }
 }

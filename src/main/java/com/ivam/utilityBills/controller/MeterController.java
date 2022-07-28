@@ -1,10 +1,10 @@
 package com.ivam.utilityBills.controller;
 
 
-import com.ivam.utilityBills.model.Family;
+import com.ivam.utilityBills.model.Owners;
 import com.ivam.utilityBills.model.Meter;
 import com.ivam.utilityBills.model.MeterType;
-import com.ivam.utilityBills.repository.FamilyRepository;
+import com.ivam.utilityBills.repository.OwnersRepository;
 import com.ivam.utilityBills.repository.MeterRepository;
 import com.ivam.utilityBills.repository.MeterTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class MeterController {
     @Autowired
     MeterTypeRepository meterTypeRepository;
     @Autowired
-    FamilyRepository familyRepository;
+    OwnersRepository ownersRepository;
 
 
     @GetMapping("/meters")
@@ -44,7 +44,7 @@ public class MeterController {
     @GetMapping("/add-meter")
     public String add(Model model) {
         List<MeterType> typeList = meterTypeRepository.findAll();
-        List<Family> ownersList = familyRepository.findAll();
+        List<Owners> ownersList = ownersRepository.findAll();
         model.addAttribute("typelist", typeList);
         model.addAttribute("ownerslist", ownersList);
         return "meters/add-meter";
@@ -60,7 +60,7 @@ public class MeterController {
     public String update(@RequestParam int id, Model model) {
         Meter meter = meterRepository.findById(id).get();
         List<MeterType> typeList = meterTypeRepository.findAll();
-        List<Family> ownersList = familyRepository.findAll();
+        List<Owners> ownersList = ownersRepository.findAll();
         model.addAttribute("typelist", typeList);
         model.addAttribute("ownerslist", ownersList);
         model.addAttribute("meter", meter);

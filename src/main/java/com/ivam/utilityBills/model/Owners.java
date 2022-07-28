@@ -3,12 +3,13 @@ package com.ivam.utilityBills.model;
 import javax.persistence.*;
 
 @Entity
-public class Family {
+@Table (name = "owners")
+public class Owners {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private int familyMembersQuantity;
+    private int registratedQuantity;
     private int share;
     private boolean isCommonUser;
     private boolean isActive;
@@ -23,39 +24,30 @@ public class Family {
 
 
     //  Constructors
-    public Family() {
+
+    public Owners() {
     }
 
-    public Family(String name) {
-        this.name = name;
-    }
-
-    public Family(int id) {
+    public Owners(int id) {
         this.id = id;
     }
 
-    public Family(int id, String name) {
-        this.id = id;
+    public Owners(String name, int registratedQuantity, int share, boolean isCommonUser, boolean isActive) {
         this.name = name;
-    }
-
-    public Family(String name, int familyMembersQuantity, int share, boolean isCommonUser, boolean isActive) {
-        this.name = name;
-        this.familyMembersQuantity = familyMembersQuantity;
+        this.registratedQuantity = registratedQuantity;
         this.share = share;
         this.isCommonUser = isCommonUser;
         this.isActive = isActive;
     }
 
-    public Family(int id, String name, int familyMembersQuantity, int share, boolean isCommonUser, boolean isActive) {
+    public Owners(int id, String name, int registratedQuantity, int share, boolean isCommonUser, boolean isActive) {
         this.id = id;
         this.name = name;
-        this.familyMembersQuantity = familyMembersQuantity;
+        this.registratedQuantity = registratedQuantity;
         this.share = share;
         this.isCommonUser = isCommonUser;
         this.isActive = isActive;
     }
-
 
     //Getters & Setters
 
@@ -76,12 +68,12 @@ public class Family {
         this.name = name;
     }
 
-    public int getFamilyMembersQuantity() {
-        return familyMembersQuantity;
+    public int getRegistratedQuantity() {
+        return registratedQuantity;
     }
 
-    public void setFamilyMembersQuantity(int familyMembersQuantity) {
-        this.familyMembersQuantity = familyMembersQuantity;
+    public void setRegistratedQuantity(int registratedQuantity) {
+        this.registratedQuantity = registratedQuantity;
     }
 
     public int getShare() {
@@ -108,22 +100,17 @@ public class Family {
         isActive = active;
     }
 
-//    public Meter getGasMeter() {
-//        return gasMeter;
-//    }
-//
-//    public void setGasMeter(Meter gasMeter) {
-//        this.gasMeter = gasMeter;
-//    }
-//
-//    public Meter getElectricityMeter() {
-//        return electricityMeter;
-//    }
-//
-//    public void setElectricityMeter(Meter electricityMeter) {
-//        this.electricityMeter = electricityMeter;
-//    }
-
+    @Override
+    public String toString() {
+        return "Owners{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", registratedQuantity=" + registratedQuantity +
+                ", share=" + share +
+                ", isCommonUser=" + isCommonUser +
+                ", isActive=" + isActive +
+                '}';
+    }
 }
 
 
