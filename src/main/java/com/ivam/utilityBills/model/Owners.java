@@ -10,7 +10,7 @@ public class Owners {
     private int id;
     private String name;
     private int registratedQuantity;
-    private int share;
+    private double share;
     private boolean isCommonUser;
     private boolean isActive;
 
@@ -76,11 +76,11 @@ public class Owners {
         this.registratedQuantity = registratedQuantity;
     }
 
-    public int getShare() {
+    public double getShare() {
         return share;
     }
 
-    public void setShare(int share) {
+    public void setShare(double share) {
         this.share = share;
     }
 
