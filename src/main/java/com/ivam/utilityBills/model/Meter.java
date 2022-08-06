@@ -7,9 +7,9 @@ public class Meter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    int id;
+    private int id;
 
-    String name;
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "meter_type.id")
@@ -17,11 +17,10 @@ public class Meter {
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    Owners owner;
+    private Owners owner;
 
 
-
-//  Constructors
+    //  Constructors
     public Meter() {
     }
 

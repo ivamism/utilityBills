@@ -9,16 +9,17 @@
 <body>
 <div class="container">
     <form action="update-owner" method="post" th:object="${owner}">
+
         <input type="hidden" th:field="*{id}">
-        Фамилия <input type="text" name="name">
+        Фамилия <input type="text" name="name" th:field="*{name}">
         <br>
-        Количество членов семьи <input type="number" name="registeredQuantity">
+        Количество членов семьи <input type="number" name="registratedQuantity" th:field="*{registratedQuantity}" >
         <br>
-        Процент участия <input type="number" step="any" name="share">
+        Процент участия <input type="number" step="any" name="share" th:field="*{share}">
         <br>
-        Общий <input type="checkbox" name="commonUser">
+        Общий <input type="checkbox" name="commonUser" th:field="*{active}">
         <br>
-        Активный <input type="checkbox" name="active">
+        Активный <input type="checkbox" name="active" th:field="*{commonUser}">
         <br>
         <br>
         <button class="btn btn-success" type="submit">Ok</button>

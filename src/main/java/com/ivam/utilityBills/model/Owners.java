@@ -102,7 +102,7 @@ public class Owners {
 
     @Override
     public String toString() {
-        return "Owners{" +
+        return "Owner {" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", registratedQuantity=" + registratedQuantity +

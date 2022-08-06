@@ -9,8 +9,7 @@ public class MeterType {
     @Column(name = "id")
     private int id;
 
-   String name;
-
+    private String name;
 
 
     @OneToOne
@@ -50,7 +49,7 @@ public class MeterType {
         this.tariff = tariff;
     }
 
-// //Getters & Setters
+    // //Getters & Setters
     public int getId() {
         return id;
     }
@@ -66,7 +65,6 @@ public class MeterType {
     public void setName(String name) {
         this.name = name;
     }
-
 
 
     public Tariff getTariffs() {
