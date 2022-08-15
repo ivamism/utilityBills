@@ -93,4 +93,14 @@ public class Meter {
     public void setOwner(Owners owner) {
         this.owner = owner;
     }
+
+    @Override
+    public String toString() {
+        return "Meter{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", metertype=" + metertype +
+                ", owner=" + owner +
+                '}';
+    }
 }

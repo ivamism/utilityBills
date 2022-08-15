@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Тарифы</title>
+    <title>Meters</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
@@ -11,32 +11,37 @@
     <a href="ownerslist">Владельцы</a>
     <a href="meters">Счетчики</a>
     <a href="metersdata">Показания счетчиков</a>
-    <a href="metertypes">Типы счетчикиков</a>
-    <a>Тарифы</a>
 
+    <a>Показания счетчиков</a>
+    <a href="metertypes">Типы счетчикиков</a>
+    <a href="tariffs">Тарифы</a>
     <hr>
-    <a href="add-tariff">Добавить тариф</a>
+    <a href="add-meter">Добавить счетчик</a>
     <br>
     <br>
     <table class="table table-striped">
         <tr>
             <th>id</th>
-            <th>Тариф</th>
-            <th>Значение</th>
+            <th>Дата</th>
+<!--            <th>Счетчик</th>-->
+            <th>Показания</th>
             <th>Редактирование</th>
             <th>Удаление</th>
 
         </tr>
-        <tr th:each="tariff : ${tariff}">
-            <td th:text="${tariff.id}"></td>
-            <td th:text="${tariff.name}"></td>
-            <td th:text="${tariff.value}">
+        <tr th:each="metersdata : ${metersdatalist}">
+            <td th:text="${metersdata.id}"></td>
+<!--            <td th:text="${metersdata.checkDate}"></td>-->
+<!--            <td th:text="${metersdata.meter.name}"></td>-->
+            <td th:text="${metersdata.value}"></td>
+
+
 
             <td>
-                <a th:href="@{update-tariff(id=${tariff.id})}">Редактировать</a>
+                <a th:href="@{update-meterdata(id=${meterdata.id})}">Редактировать</a>
             </td>
             <td>
-                <a class="text-danger" th:href="@{delete-tariff(id=${tariff.id})}">Удалить</a>
+                <a class="text-danger" th:href="@{delete-meterdata(id=${meterdata.id})}">Удалить</a>
             </td>
         </tr>
     </table>

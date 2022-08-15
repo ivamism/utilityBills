@@ -18,8 +18,6 @@ public class OwnerController {
     @Autowired
     OwnersRepository ownersRepository;
 
-//    @Autowired
-//    MeterRepository meterRepository;
 
 
     @GetMapping("/ownerslist")
