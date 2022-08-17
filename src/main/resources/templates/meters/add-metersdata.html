@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Внесение показаний</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+<!--    <tr th:each="meterdata : ${metersdatalist}">-->
+<!--        <td th:text="${meterdata.id}"></td>-->
+<!--        <td th:text="${meterdata.checkDate}"></td>-->
+<!--        <td th:text="${meterdata.meter.name}"></td>-->
+<!--        <td th:text="${meterdata.value}"></td>-->
+
+<!--    <tr th:each="meter : ${meterlist}">-->
+<!--        <td th:text="${meter.id}"></td>-->
+<!--        <td th:text="${meter.name}"></td>-->
+<!--        <td th:text="${meter.metertype.name}"></td>-->
+<!--        <td th:text="${meter.owner.name}"></td>-->
+
+
+
+    <form action="add-metersdata" method="post">
+        Дата внесения <input type="date" name="checkDate">
+        <br>
+        Счетчик
+        <select name="meter">
+            <th:block th:each="meter : ${metersList}">
+                <option th:value="${meter.id}" th:text="${meter.name}" />
+            </th:block>
+        </select>
+        <br>
+
+        Показания: <input type="number" name="value">
+        <br>
+
+
+<!--        Название <input type="text" name="name">-->
+
+<!--        <br>-->
+<!--        Тип-->
+<!--        <select name="metertype">-->
+<!--            <th:block th:each="metertype : ${typelist}">-->
+<!--                <option th:value="${metertype.id}" th:text="${metertype.name}" />-->
+<!--            </th:block>-->
+<!--        </select>-->
+<!--        <br>-->
+
+<!--        Владелец-->
+<!--        <select name="owner">-->
+<!--            <th:block th:each="owner : ${ownerslist}">-->
+<!--                <option th:value="${owner.id}" th:text="${owner.name}" />-->
+<!--            </th:block>-->
+<!--        </select>-->
+
+        <br>
+        <br>
+        <button class="btn btn-success" type="submit">Добавить показания</button>
+    </form>
+</div>
+</body>
+</html>

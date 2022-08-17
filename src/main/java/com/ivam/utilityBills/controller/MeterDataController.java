@@ -27,6 +27,7 @@ public class MeterDataController {
 
     @Autowired
     MeterRepository meterRepository;
+
 //    @Autowired
 //    MeterTypeRepository meterTypeRepository;
 //    @Autowired
@@ -40,27 +41,27 @@ public class MeterDataController {
         return "metersdata/metersdata";
     }
 
-//    @GetMapping("/delete-meter")
-//    public String delete(@RequestParam int id) {
-//        meterRepository.deleteById(id);
-//        return "redirect:meters";
-//    }
-//
-//    @GetMapping("/add-meter")
-//    public String add(Model model) {
-//        List<MeterType> typeList = meterTypeRepository.findAll();
+    @GetMapping("/delete-metersdata")
+    public String delete(@RequestParam int id) {
+        metersDataRepository.deleteById(id);
+        return "redirect:metersdata";
+    }
+
+    @GetMapping("/add-metersdata")
+    public String add(Model model) {
+        List<Meter> metersList = meterRepository.findAll();
 //        List<Owners> ownersList = ownersRepository.findAll();
-//        model.addAttribute("typelist", typeList);
+        model.addAttribute("metersList", metersList);
 //        model.addAttribute("ownerslist", ownersList);
-//        return "meters/add-meter";
-//    }
-//
-//    @PostMapping("/add-meter")
-//    public String add(@ModelAttribute Meter meter) {
-//        meterRepository.save(meter);
-//        return "redirect:meters";
-//    }
-//
+        return "meters/add-metersdata";
+    }
+
+    @PostMapping("/add-metersdata")
+    public String add(@ModelAttribute MetersData metersData) {
+        metersDataRepository.save(metersData);
+        return "redirect:metersdata";
+    }
+
 //    @GetMapping("/update-meter")
 //    public String update(@RequestParam int id, Model model) {
 //        Meter meter = meterRepository.findById(id).get();
