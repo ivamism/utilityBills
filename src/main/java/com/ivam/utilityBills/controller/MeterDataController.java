@@ -50,10 +50,10 @@ public class MeterDataController {
     @GetMapping("/add-metersdata")
     public String add(Model model) {
         List<Meter> metersList = meterRepository.findAll();
-//        List<Owners> ownersList = ownersRepository.findAll();
+
         model.addAttribute("metersList", metersList);
-//        model.addAttribute("ownerslist", ownersList);
-        return "meters/add-metersdata";
+
+        return "metersdata/add-metersdata";
     }
 
     @PostMapping("/add-metersdata")
