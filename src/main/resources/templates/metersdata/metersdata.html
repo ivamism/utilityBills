@@ -10,7 +10,6 @@
 <div class="container">
     <a href="ownerslist">Владельцы</a>
     <a href="meters">Счетчики</a>
-
     <a>Показания счетчиков</a>
     <a href="metertypes">Типы счетчикиков</a>
     <a href="tariffs">Тарифы</a>
@@ -26,18 +25,16 @@
             <th>Показания</th>
             <th>Редактирование</th>
             <th>Удаление</th>
-
         </tr>
+
         <tr th:each="meterdata : ${metersdatalist}">
             <td th:text="${meterdata.id}"></td>
             <td th:text="${meterdata.checkDate}"></td>
             <td th:text="${meterdata.meter.name}"></td>
             <td th:text="${meterdata.value}"></td>
 
-
-
             <td>
-<!--                <a th:href="@{update-metersdata(id=${meterdata.id})}">Редактировать</a>-->
+                <a th:href="@{update-metersdata(id=${meterdata.id})}">Редактировать</a>
             </td>
             <td>
                 <a class="text-danger" th:href="@{delete-metersdata(id=${meterdata.id})}">Удалить</a>

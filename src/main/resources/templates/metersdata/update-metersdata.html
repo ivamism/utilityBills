@@ -7,29 +7,25 @@
 </head>
 <body>
 <div class="container">
-    <form action="update-meter" method="post" th:object="${meter}">
+    <form action="update-metersdata" method="post" th:object="${metersData}">
         <input type="hidden" th:field="*{id}">
-        Название <input type="text" name="name" th:field="*{name}">
-        <br>
 
-        Тип
-        <select name="metertype">
-            <th:block th:each="metertype : ${typelist}">
-                <option th:value="${metertype.id}" th:text="${metertype.name}" />
+
+        Дата внесения <input type="date" name="checkDate" th:field="*{checkDate}">
+        <br>
+        Счетчик
+        <select name="meter">
+            <th:block th:each="meter : ${metersList}">
+                <option th:value="${meter.id}" th:text="${meter.name}" />
             </th:block>
         </select>
         <br>
 
-        Владелец
-        <select name="owner">
-            <th:block th:each="owner : ${ownerslist}">
-                <option th:value="${owner.id}" th:text="${owner.name}" />
-            </th:block>
-        </select>
+        Показания: <input type="number" name="value" th:field="*{value}">
 
         <br>
         <br>
-        <button class="btn btn-success" type="submit">OK</button>
+        <button class="btn btn-success" type="submit">Изменить показания</button>
     </form>
 </div>
 </body>
