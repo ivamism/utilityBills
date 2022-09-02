@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Тарифы</title>
+    <title>Дата проверки</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
@@ -10,34 +10,33 @@
 <div class="container">
     <a href="ownerslist">Владельцы</a>
     <a href="meters">Счетчики</a>
-    <a href="checkdate">Даты проверки счетчиков</a>
+    <a> Дата проверки счетчиков</a>
     <a href="metersdata">Показания счетчиков</a>
     <a href="metertypes">Типы счетчикиков</a>
-    <a>Тарифы</a>
-
+    <a href="tariffs">Тарифы</a>
     <hr>
-    <a href="add-tariff">Добавить тариф</a>
+    <a href="add-checkdate">Создать новую дату проверки счетчиков</a>
     <br>
     <br>
     <table class="table table-striped">
         <tr>
             <th>id</th>
-            <th>Тариф</th>
-            <th>Значение</th>
+            <th>Дата</th>
             <th>Редактирование</th>
             <th>Удаление</th>
-
+            <th>Показания счетчиков</th>
         </tr>
-        <tr th:each="tariff : ${tariff}">
-            <td th:text="${tariff.id}"></td>
-            <td th:text="${tariff.name}"></td>
-            <td th:text="${tariff.value}">
+
+        <tr th:each="checkdate : ${checkdates}">
+            <td th:text="${checkdate.id}"></td>
+            <td th:text="${checkdate.verificationDate}"></td>
+
 
             <td>
-                <a th:href="@{update-tariff(id=${tariff.id})}">Редактировать</a>
+                <a th:href="@{update-checkdate(id=${checkdate.id})}">Редактировать</a>
             </td>
             <td>
-                <a class="text-danger" th:href="@{delete-tariff(id=${tariff.id})}">Удалить</a>
+                <a class="text-danger" th:href="@{delete-checkdate(id=${checkdate.id})}">Удалить</a>
             </td>
         </tr>
     </table>

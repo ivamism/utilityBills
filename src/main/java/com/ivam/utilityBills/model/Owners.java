@@ -14,14 +14,7 @@ public class Owners {
     private boolean isCommonUser;
     private boolean isActive;
 
-//    @ManyToOne(cascade = {CascadeType.ALL})
-//    @JoinColumn(name = "meter_id", insertable = false, updatable = false)
-//    Meter gasMeter;
 //
-//    @ManyToOne(cascade = {CascadeType.ALL})
-//    @JoinColumn(name = "meter_id", insertable = false, updatable = false)
-//    Meter electricityMeter;
-
 
     //  Constructors
 

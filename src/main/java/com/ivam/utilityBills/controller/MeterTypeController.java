@@ -2,7 +2,6 @@ package com.ivam.utilityBills.controller;
 
 
 import com.ivam.utilityBills.model.MeterType;
-import com.ivam.utilityBills.repository.MeterRepository;
 import com.ivam.utilityBills.repository.MeterTypeRepository;
 import com.ivam.utilityBills.repository.TariffRepository;
 import org.springframework.beans.factory.annotation.Autowired;

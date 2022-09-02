@@ -19,7 +19,6 @@ public class OwnerController {
     OwnersRepository ownersRepository;
 
 
-
     @GetMapping("/ownerslist")
     public String findAll(Model model) {
         List<Owners> owners = ownersRepository.findAll();
