@@ -8,6 +8,7 @@ import com.ivam.utilityBills.repository.OwnersRepository;
 import com.ivam.utilityBills.repository.MeterRepository;
 import com.ivam.utilityBills.repository.MeterTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class MeterController {
 
     @GetMapping("/meters")
     public String findAll(Model model) {
-        List<Meter> meterList = meterRepository.findAll();
+        List<Meter> meterList = meterRepository.findAllOderByOwner_Id();
         model.addAttribute("meterlist", meterList);
         return "meters/meters";
     }

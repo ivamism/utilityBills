@@ -21,7 +21,7 @@ public class OwnerController {
 //findAllByIsCommonUserTrueOrderByIsActiveTrueName
     @GetMapping("/ownerslist")
     public String findAll(Model model) {
-        List<Owners> owners = ownersRepository.findAll();
+        List<Owners> owners = ownersRepository.findAllOderByIsActiveUserTrueDesk();
         model.addAttribute("ownerslist", owners);
         return "owners/ownerslist";
     }
