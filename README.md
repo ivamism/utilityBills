@@ -2,7 +2,8 @@
 ## Этот проект написан с использованием:
 - Java
 - Spring Boot
-- Spring Data
+- Spring Data JPA
+- Spring Web MVC
 - Postgresql
 
 

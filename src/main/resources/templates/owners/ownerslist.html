@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Families</title>
+    <title>Владельцы</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
@@ -27,7 +27,7 @@
             <th>Кол-во зарегистрированных</th>
             <th>% участия</th>
             <th>Общий</th>
-            <th>Активный</th>
+<!--            <th>Активный</th>-->
 
             <th>Редактирование</th>
             <th>Удаление</th>
@@ -38,7 +38,7 @@
             <td th:text="${owner.registratedQuantity}"></td>
             <td th:text="${owner.share}"></td>
             <td th:text="${owner.commonUser}"></td>
-            <td th:text="${owner.active}"></td>
+<!--            <td th:text="${owner.active}"></td>-->
 
             <td>
                 <a th:href="@{update-owner(id=${owner.id})}">Редактировать</a>

@@ -24,8 +24,8 @@ public class CheckDateController {
 
 
     @GetMapping("/checkdate")
-    public String findAll(Model model) {
-        List<CheckDate> checkDates = checkDateRepository.findAll();
+    public String findAllByOrderByIdDesc(Model model) {
+        List<CheckDate> checkDates = checkDateRepository.findAllByOrderByIdDesc();
         model.addAttribute("checkdates", checkDates);
         return "checkdate/checkdate";
     }

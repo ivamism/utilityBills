@@ -49,7 +49,7 @@ public class MeterType {
         this.tariff = tariff;
     }
 
-    // //Getters & Setters
+     //Getters & Setters
     public int getId() {
         return id;
     }
