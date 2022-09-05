@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Показания счетчиков</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <a href="ownerslist">Владельцы</a>
+    <a href="meters">Счетчики</a>
+    <a>Показания счетчиков</a>
+    <a href="metertypes">Типы счетчикиков</a>
+    <a href="tariffs">Тарифы</a>
+    <hr>
+
+<!--    <form action="update-checkdate" method="post" th:object="${checkdate}">-->
+<!--        <input type="hidden" th:field="*{id}">-->
+
+<!--        Дата внесения <input type="date" name="verificationDate" th:field="*{verificationDate}">-->
+
+    <table class="table table-striped">
+        <tr th:object="${checkdate}">
+            <td>Дата проверки: </td>
+            <td th:text="${checkdate.verificationDate}"></td>
+        </tr>
+
+<!--    Дата проверки: <th:text>="${meterdata.checkDate}">-->
+
+    <a href="add-metersdata">Внести новые показания счетчиков</a>
+    <br>
+    <br>
+    <table class="table table-striped">
+        <tr >
+<!--            <th>Дата</th>-->
+            <th>id</th>
+            <th>Счетчик</th>
+            <th>Показания</th>
+            <th>Редактирование</th>
+            <th>Удаление</th>
+        </tr>
+
+        <tr th:each="meterdata : ${metersdatalist}">
+<!--            <td th:text="${meterdata.checkdate.verificationDate}"></td>-->
+            <td th:text="${meterdata.id}"></td>
+            <td th:text="${meterdata.meter.name}"></td>
+            <td th:text="${meterdata.value}"></td>
+
+            <td>
+                <a th:href="@{update-metersdata(id=${meterdata.id})}">Редактировать</a>
+            </td>
+            <td>
+                <a class="text-danger" th:href="@{delete-metersdata(id=${meterdata.id})}">Удалить</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

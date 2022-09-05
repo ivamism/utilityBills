@@ -1,16 +1,14 @@
 package com.ivam.utilityBills.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.*;
 
 // TODO think to rename  this class
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -26,19 +24,11 @@ public class CheckDate {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date verificationDate;
 
+    @ToString.Exclude
+    @ManyToMany
+    @JoinTable(name = "check_date_meters_datas",
+            joinColumns = @JoinColumn(name = "check_date_null", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "meters_datas_id", referencedColumnName = "id"))
+    private Set<MetersData> metersDatas = new LinkedHashSet<>();
 
-
-
-    public CheckDate(Date checkDate) {
-        this.verificationDate = checkDate;
-    }
-
-    public CheckDate(int id, Date checkDate) {
-        this.id = id;
-        this.verificationDate = checkDate;
-    }
-
-    public CheckDate(int id) {
-        this.id = id;
-    }
 }

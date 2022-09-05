@@ -1,23 +1,19 @@
 package com.ivam.utilityBills.controller;
 
 
-import com.ivam.utilityBills.model.Meter;
-import com.ivam.utilityBills.model.MeterType;
+import com.ivam.utilityBills.model.CheckDate;
 import com.ivam.utilityBills.model.MetersData;
-import com.ivam.utilityBills.model.Owners;
+import com.ivam.utilityBills.repository.CheckDateRepository;
 import com.ivam.utilityBills.repository.MeterRepository;
-import com.ivam.utilityBills.repository.MeterTypeRepository;
 import com.ivam.utilityBills.repository.MetersDataRepository;
-import com.ivam.utilityBills.repository.OwnersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class MeterDataController {
@@ -26,12 +22,11 @@ public class MeterDataController {
     MetersDataRepository metersDataRepository;
 
     @Autowired
-    MeterRepository meterRepository;
-//    @Autowired
-//    MeterTypeRepository meterTypeRepository;
-//    @Autowired
-//    OwnersRepository ownersRepository;
+    CheckDateRepository checkDateRepository;
 
+
+//
+//metersdata-for-checkdate
 
     @GetMapping("/metersdata")
     public String findAll(Model model) {
@@ -39,6 +34,17 @@ public class MeterDataController {
         model.addAttribute("metersdatalist", metersDataList);
         return "metersdata/metersdata";
     }
+
+    @GetMapping("/metersdata-for-checkdate")
+    public String findAllByDate(@RequestParam int id, Model model) {
+        Set<MetersData> metersDataList = metersDataRepository.getByCheckDates_Id(id);
+        model.addAttribute("metersdatalist", metersDataList);
+        CheckDate checkDate = checkDateRepository.findById(id).get();
+        model.addAttribute("checkdate", checkDate);
+        return "metersdata/metersdatabydate";
+    }
+
+
 
 //    @GetMapping("/delete-meter")
 //    public String delete(@RequestParam int id) {

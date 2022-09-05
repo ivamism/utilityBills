@@ -9,6 +9,7 @@ public class Meter {
     @Column(nullable = false)
     private int id;
 
+    @Column(unique = true, length = 20)
     private String name;
 
     @ManyToOne

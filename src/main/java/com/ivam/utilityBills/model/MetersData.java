@@ -1,9 +1,21 @@
 package com.ivam.utilityBills.model;
 
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 
 @Entity
 public class MetersData {
@@ -11,9 +23,9 @@ public class MetersData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date checkDate;
+//    @Temporal(TemporalType.DATE)
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    private Date checkDate;
 
     @ManyToOne
     @JoinColumn(name = "meter_id")
@@ -21,65 +33,11 @@ public class MetersData {
 
     private int value;
 
-//    Constructors
 
-    public MetersData() {
-    }
+    @ManyToMany(mappedBy = "metersDatas")
+//    @OrderBy("oder.verificationDate Desc")
+    private List<CheckDate> checkDates = new ArrayList<>();
 
-    public MetersData(int id) {
-        this.id = id;
-    }
-
-    public MetersData(int id, Date checkDate, Meter meter, int value) {
-        this.id = id;
-        this.checkDate = checkDate;
-        this.meter = meter;
-        this.value = value;
-    }
-
-//    Getters and Setters
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getCheckDate() {
-        return checkDate;
-    }
-
-    public void setCheckDate(Date checkDate) {
-        this.checkDate = checkDate;
-    }
-
-    public Meter getMeter() {
-        return meter;
-    }
-
-    public void setMeter(Meter meter) {
-        this.meter = meter;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return "MetersData{" +
-                "id=" + id +
-                ", checkDate=" + checkDate +
-                ", meter=" + meter +
-                ", value=" + value +
-                '}';
-    }
 }
 
 

@@ -38,6 +38,9 @@
             <td>
                 <a class="text-danger" th:href="@{delete-checkdate(id=${checkdate.id})}">Удалить</a>
             </td>
+            <td>
+                <a th:href="@{metersdata-for-checkdate(id=${checkdate.id})}">Показания счетчиков за эту дату</a>
+            </td>
         </tr>
     </table>
 </div>
