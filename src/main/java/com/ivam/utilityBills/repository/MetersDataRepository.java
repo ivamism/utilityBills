@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Set;
 
 public interface MetersDataRepository extends JpaRepository<MetersData, Integer> {
-    Set<MetersData> getByCheckDates_Id(int id);
 
+    Set<MetersData> getByCheckDates_IdOrderByMeter_IdAsc(int id);
 }

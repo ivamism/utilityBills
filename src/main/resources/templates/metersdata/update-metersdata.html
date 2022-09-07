@@ -3,23 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
+<!--    <table class="table table-striped">-->
+<!--        <tr>-->
+<!--            <th>Дата проверки: </th>-->
+<!--            <th>Счетчик: </th>-->
+
+<!--        </tr>-->
+
+<!--        <tr th:object="${metersData}">-->
+
+<!--            <td th:text="${metersData.checkDates.verificationDate}"></td>-->
+<!--            <td th:text="${metersData.meter.name}"></td>-->
+
+
+<!--        </tr>-->
+<!--    </table>-->
+
+    <br>
+    <br>
+
     <form action="update-metersdata" method="post" th:object="${metersData}">
         <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{checkDates}">
+        <input type="hidden" th:field="*{meter.id}">
 
-
-        Дата внесения <input type="date" name="checkDate" th:field="*{checkDate}">
-        <br>
-        Счетчик
-        <select name="meter">
-            <th:block th:each="meter : ${metersList}">
-                <option th:value="${meter.id}" th:text="${meter.name}" />
-            </th:block>
-        </select>
-        <br>
 
         Показания: <input type="number" name="value" th:field="*{value}">
 

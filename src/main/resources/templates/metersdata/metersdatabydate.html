@@ -15,25 +15,21 @@
     <a href="tariffs">Тарифы</a>
     <hr>
 
-<!--    <form action="update-checkdate" method="post" th:object="${checkdate}">-->
-<!--        <input type="hidden" th:field="*{id}">-->
-
-<!--        Дата внесения <input type="date" name="verificationDate" th:field="*{verificationDate}">-->
 
     <table class="table table-striped">
         <tr th:object="${checkdate}">
             <td>Дата проверки: </td>
             <td th:text="${checkdate.verificationDate}"></td>
         </tr>
+    </table>
 
-<!--    Дата проверки: <th:text>="${meterdata.checkDate}">-->
+
 
     <a href="add-metersdata">Внести новые показания счетчиков</a>
     <br>
     <br>
     <table class="table table-striped">
         <tr >
-<!--            <th>Дата</th>-->
             <th>id</th>
             <th>Счетчик</th>
             <th>Показания</th>
@@ -42,7 +38,7 @@
         </tr>
 
         <tr th:each="meterdata : ${metersdatalist}">
-<!--            <td th:text="${meterdata.checkdate.verificationDate}"></td>-->
+
             <td th:text="${meterdata.id}"></td>
             <td th:text="${meterdata.meter.name}"></td>
             <td th:text="${meterdata.value}"></td>

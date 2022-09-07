@@ -27,7 +27,9 @@ public class CheckDateController {
     public String findAllByOrderByIdDesc(Model model) {
         List<CheckDate> checkDates = checkDateRepository.findAllByOrderByIdDesc();
         model.addAttribute("checkdates", checkDates);
-        return "checkdate/checkdate";
+        String s = "checkdate/checkdate";
+        return s;
+//        return "checkdate/checkdate";
     }
 
     @GetMapping("/delete-checkdate")

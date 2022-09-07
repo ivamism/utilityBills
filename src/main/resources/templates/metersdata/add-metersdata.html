@@ -8,8 +8,16 @@
 <body>
 <div class="container">
 
-    <form action="add-metersdata" method="post">
-        Дата внесения <input type="date" name="checkDate">
+    <table class="table table-striped">
+        <tr th:object="${checkdate}">
+            <td>Дата проверки: </td>
+            <td th:text="${checkdate.verificationDate}"></td>
+        </tr>
+    </table>
+
+    <form action="add-metersdata" method="post"th:object="${checkdate}">
+        <input type="hidden" th:value="${checkdate.id}">
+<!--        Дата внесения <input type="date" name="checkDate">-->
         <br>
         Счетчик
         <select name="meter">
