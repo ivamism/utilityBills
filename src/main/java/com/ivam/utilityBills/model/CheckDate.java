@@ -25,10 +25,7 @@ public class CheckDate {
     private Date verificationDate;
 
     @ToString.Exclude
-    @ManyToMany
-    @JoinTable(name = "check_date_meters_datas",
-            joinColumns = @JoinColumn(name = "check_date_null", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "meters_datas_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "checkDates", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     private Set<MetersData> metersDatas = new LinkedHashSet<>();
 
 }

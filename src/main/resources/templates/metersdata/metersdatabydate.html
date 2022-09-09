@@ -9,8 +9,9 @@
 <body>
 <div class="container">
     <a href="ownerslist">Владельцы</a>
-    <a href="meters">Счетчики</a>
+    <a href="checkdate">Даты проверки счетчиков</a>
     <a>Показания счетчиков</a>
+    <a href="meters">Счетчики</a>
     <a href="metertypes">Типы счетчикиков</a>
     <a href="tariffs">Тарифы</a>
     <hr>
@@ -20,12 +21,12 @@
         <tr th:object="${checkdate}">
             <td>Дата проверки: </td>
             <td th:text="${checkdate.verificationDate}"></td>
+            <td>
+                <a th:href="@{add-metersdata(id=${checkdate.id})}">Внести новые показания счетчиков</a>
+            </td>
         </tr>
     </table>
 
-
-
-    <a href="add-metersdata">Внести новые показания счетчиков</a>
     <br>
     <br>
     <table class="table table-striped">

@@ -1,6 +1,5 @@
 package com.ivam.utilityBills.controller;
 
-
 import com.ivam.utilityBills.model.CheckDate;
 import com.ivam.utilityBills.model.Meter;
 import com.ivam.utilityBills.model.MetersData;
@@ -31,9 +30,6 @@ public class MeterDataController {
     MeterRepository meterRepository;
 
 
-//
-//metersdata-for-checkdate
-
     @GetMapping("/metersdata")
     public String findAll(Model model) {
         List<MetersData> metersDataList = metersDataRepository.findAll();
@@ -53,20 +49,22 @@ public class MeterDataController {
     @GetMapping("/delete-metersdata")
     public String delete(@RequestParam int id) {
         metersDataRepository.deleteById(id);
-        return "redirect:metersdata";
+        return "redirect:checkdate";
     }
 
     @GetMapping("/add-metersdata")
-    public String add(Model model) {
+    public String add(@RequestParam int id, Model model) {
         List<Meter> metersList = meterRepository.findAll();
         model.addAttribute("metersList", metersList);
+        CheckDate checkDate = checkDateRepository.findById(id).get();
+        model.addAttribute("checkdates", checkDate);
         return "metersdata/add-metersdata";
     }
 
     @PostMapping("/add-metersdata")
     public String add(@ModelAttribute MetersData metersData) {
         metersDataRepository.save(metersData);
-        return "redirect:metersdata";
+        return "redirect:checkdate";
     }
 
     @GetMapping("/update-metersdata")
@@ -81,5 +79,4 @@ public class MeterDataController {
         metersDataRepository.save(meterData);
         return "redirect:checkdate";
     }
-
 }

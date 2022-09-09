@@ -1,14 +1,12 @@
 package com.ivam.utilityBills.model;
 
 import lombok.*;
-import org.hibernate.Hibernate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Objects;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,20 +21,17 @@ public class MetersData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @Temporal(TemporalType.DATE)
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    private Date checkDate;
-
     @ManyToOne
     @JoinColumn(name = "meter_id")
     private Meter meter;
 
     private int value;
 
-
-    @ManyToMany(mappedBy = "metersDatas")
-//    @OrderBy("oder.verificationDate Desc")
-    private List<CheckDate> checkDates = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinTable(name = "check_date_meters_datas",
+            joinColumns = @JoinColumn(name = "meters_datas_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "check_date_null", referencedColumnName = "id"))
+    private Set<CheckDate> checkDates = new LinkedHashSet<>();
 
 }
 
