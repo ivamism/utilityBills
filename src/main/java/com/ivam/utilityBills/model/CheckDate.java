@@ -28,4 +28,11 @@ public class CheckDate {
     @ManyToMany(mappedBy = "checkDates", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     private Set<MetersData> metersDatas = new LinkedHashSet<>();
 
+//    @Override
+//    public String toString() {
+//        return "CheckDate{" +
+//                "id=" + id +
+//                ", verificationDate=" + verificationDate +
+//                '}';
+//    }
 }

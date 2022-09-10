@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:Счетчик="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,27 +7,35 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+
+<div th:object="${metersData}">
     <table class="table table-striped">
         <tr>
-            <th>Дата проверки: </th>
-            <th>Счетчик: </th>
+            <td>Счетчик:</td>
+            <td th:text="*{meter.name}"></td>
         </tr>
 
-        <tr th:object="${metersData}">
-<!--            <td th:text="${metersData.checkdates.verificationDate}"></td>-->
-            <td th:text="${metersData.meter.name}"></td>
+<!--        <tr >-->
+<!--            <td>Дата проверки:</td>-->
+<!--            <td th:text="*{checkDate.verificationDate}"></td>-->
+<!--        </tr>-->
+
+        <tr th:text="*{checkDates}">
+            <td>Дата проверки:</td>
+            <td th:text="*{verificationDate}"></td>
         </tr>
     </table>
+</div>
 
-    <br>
-    <br>
+<br>
+<br>
+
+<div class="container">
 
     <form action="update-metersdata" method="post" th:object="${metersData}">
         <input type="hidden" th:field="*{id}">
         <input type="hidden" th:field="*{checkDates}">
         <input type="hidden" th:field="*{meter.id}">
-
 
         Показания: <input type="number" name="value" th:field="*{value}">
 
