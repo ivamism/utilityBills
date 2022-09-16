@@ -18,7 +18,6 @@ public class OwnerController {
     @Autowired
     OwnersRepository ownersRepository;
 
-//findAllByIsCommonUserTrueOrderByIsActiveTrueName
     @GetMapping("/ownerslist")
     public String findAll(Model model) {
         List<Owners> owners = ownersRepository.findAllOderByIsActiveUserTrueDesk();
