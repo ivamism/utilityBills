@@ -31,7 +31,8 @@ public class MeterController {
 
     @GetMapping("/meters")
     public String findAll(Model model) {
-        List<Meter> meterList = meterRepository.findAllOderByOwner_Id();
+//        List<Meter> meterList = meterRepository.findAllOderByOwner_Id();
+        List<Meter> meterList = meterRepository.findAll();
         model.addAttribute("meterlist", meterList);
         return "meters/meters";
     }

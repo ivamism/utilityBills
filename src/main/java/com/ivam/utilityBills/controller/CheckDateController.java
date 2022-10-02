@@ -4,6 +4,7 @@ import com.ivam.utilityBills.model.CheckDate;
 import com.ivam.utilityBills.model.MetersData;
 import com.ivam.utilityBills.repository.CheckDateRepository;
 import com.ivam.utilityBills.repository.MetersDataRepository;
+import com.ivam.utilityBills.service.PreBillCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +17,9 @@ import java.util.List;
 
 @Controller
 public class CheckDateController {
-//    @Autowired
-//    MetersDataRepository metersDataRepository;
+
+    @Autowired
+    PreBillCreator preBillCreator;
 
     @Autowired
     CheckDateRepository checkDateRepository;
@@ -27,10 +29,24 @@ public class CheckDateController {
     public String findAllByOrderByIdDesc(Model model) {
         List<CheckDate> checkDates = checkDateRepository.findAllByOrderByIdDesc();
         model.addAttribute("checkdates", checkDates);
-        String s = "checkdate/checkdate";
-        return s;
-//        return "checkdate/checkdate";
+        return "checkdate/checkdate";
     }
+
+    @GetMapping("/checkdateonlytwo")
+    public String findTopTwo(Model model) {
+        List<CheckDate> checkDates = preBillCreator.findTwoLastCheckDates();
+        model.addAttribute("checkdates", checkDates);
+        return "checkdate/checkdateonlytwo";
+    }
+
+    @GetMapping("/checkdatelast")
+    public String getLastChekDate(Model model) {
+        CheckDate checkDate = preBillCreator.getCurrentCheckDate();
+        model.addAttribute("checkdates", checkDate);
+        return "checkdate/checkdatelast";
+    }
+
+
 
     @GetMapping("/delete-checkdate")
     public String delete(@RequestParam int id) {
