@@ -3,9 +3,7 @@ package com.ivam.utilityBills.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -27,7 +25,8 @@ public class MetersData {
 
     private int value;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(name = "check_date_meters_datas",
             joinColumns = @JoinColumn(name = "meters_datas_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "check_date_null", referencedColumnName = "id"))

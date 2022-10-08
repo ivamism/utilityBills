@@ -24,15 +24,9 @@ public class CheckDate {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date verificationDate;
 
+//TODO Check how it works if @ToString.Exclud
     @ToString.Exclude
     @ManyToMany(mappedBy = "checkDates", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    private Set<MetersData> metersDatas = new LinkedHashSet<>();
+    private List<MetersData> metersDatas = new ArrayList<>();
 
-//    @Override
-//    public String toString() {
-//        return "CheckDate{" +
-//                "id=" + id +
-//                ", verificationDate=" + verificationDate +
-//                '}';
-//    }
 }

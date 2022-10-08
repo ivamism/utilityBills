@@ -8,16 +8,20 @@ import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@ToString
 
 @Service
 public class PreBillCreator implements PreBillCreatorInterface {
-//TODO Think to rename class
+    //TODO Think to rename class
     @Autowired
     CheckDateRepository checkDateRepository;
 
@@ -28,58 +32,46 @@ public class PreBillCreator implements PreBillCreatorInterface {
     CheckDate currentCheckDate;
     CheckDate previousCheckDate;
 
-    List<MetersData> currentMeterrsData;
-    List<MetersData> previousMeterrsData;
+    List<MetersData> currentMetersDataList;
+    List<MetersData> previousMeterDataList;
 
     @Override
     public List<CheckDate> findTwoLastCheckDates() {
-        List<CheckDate> twoLastCheckDates = checkDateRepository.findTop2AllByOrderByVerificationDateDesc();
-        return twoLastCheckDates;
-    }
-    public void  getCurrentAndPreviousCheckDates(){
-        CheckDate last = findTwoLastCheckDates().get(0);
-        CheckDate previous = findTwoLastCheckDates().get(1);
-        setCurrentCheckDate(last);
-        setPreviousCheckDate(previous);
-
-
+        return checkDateRepository.findTop2AllByOrderByVerificationDateDesc();
     }
 
-    public void setCurrentCheckDate(CheckDate currentCheckDate) {
-        this.currentCheckDate = currentCheckDate;
+    void setCurrentCheckDate() {
+        currentCheckDate = findTwoLastCheckDates().get(0);
     }
 
-    public void setPreviousCheckDate(CheckDate previousCheckDate) {
-        this.previousCheckDate = previousCheckDate;
+    void setPreviousCheckDate() {
+        previousCheckDate = findTwoLastCheckDates().get(1);
     }
 
-    //    public void setCurrentCheckDate() {
-//
-//        CheckDate checkDate = findTwoLastCheckDates().get(0);
-//        this.currentCheckDate = checkDate;
-//    }
+    @Override
+    public List<MetersData> getMetersDataForCheckDate(int id) {
+        return metersDataRepository.findAllByCheckDates_Id(id);
+    }
 
+    public void setCurrentMetersDataList() {
+        int checkDateId = currentCheckDate.getId();
+        this.currentMetersDataList = getMetersDataForCheckDate(checkDateId);
+    }
 
-//
-//    public void setCurrentMeterrsData() {
-//        List<MetersData> metersDataList = metersDataRepository.getByCheckDates_Id(currentCheckDate.getId());
-//        this.currentMeterrsData = currentMeterrsData;
-//    }
-//
-//    public void setPreviousMeterrsData() {
-//        List<MetersData> metersDataList = metersDataRepository.getByCheckDates_Id(previousCheckDate.getId());
-//        this.previousMeterrsData = previousMeterrsData;
-//    }
+    public void setPreviousMeterDataList() {
+        int checkDateId = previousCheckDate.getId();
+        this.previousMeterDataList = getMetersDataForCheckDate(checkDateId);
+    }
 
-//        MetersData meterData = metersDataRepository.findById(id).get();
-
-//    List<PreBill> PreBillListCreator(){
-//        for (int i = 0; i < currentMeterrsData.size(); i++) {
-//
-//        }
-//
-//        return null;
-//    }
+//TODO переделать метод для использования в цикле для извлечения данных по очереди из списка
+public String getMeterDataName (){
+    String metername = currentMetersDataList.get(1).getMeter().getName();
+    Date verificationDate = currentCheckDate.getVerificationDate();
+    SimpleDateFormat format = new SimpleDateFormat("MM/YYYY");
+    String dateForName = format.format(verificationDate);
+    String name = metername + " - " + dateForName;
+    return name;
+}
 
 }
 

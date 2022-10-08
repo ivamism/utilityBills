@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class MeterDataController {
@@ -39,7 +38,8 @@ public class MeterDataController {
 
     @GetMapping("/metersdata-for-checkdate")
     public String findAllByDate(@RequestParam int id, Model model) {
-        Set<MetersData> metersDataList = metersDataRepository.getByCheckDates_IdOrderByMeter_IdAsc(id);
+//        Set<MetersData> metersDataList = metersDataRepository.getByCheckDates_IdOrderByMeter_IdAsc(id);
+        List<MetersData> metersDataList = metersDataRepository.getByCheckDates_IdOrderByMeter_IdAsc(id);
         model.addAttribute("metersdatalist", metersDataList);
         CheckDate checkDate = checkDateRepository.findById(id).get();
         model.addAttribute("checkdate", checkDate);

@@ -41,7 +41,7 @@ public class CheckDateController {
 
     @GetMapping("/checkdatelast")
     public String getLastChekDate(Model model) {
-        CheckDate checkDate = preBillCreator.getCurrentCheckDate();
+        CheckDate checkDate = preBillCreator.findTwoLastCheckDates().get(1);
         model.addAttribute("checkdates", checkDate);
         return "checkdate/checkdatelast";
     }
