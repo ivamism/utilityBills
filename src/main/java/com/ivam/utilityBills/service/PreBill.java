@@ -15,4 +15,8 @@ public class PreBill {
     private int currentData;
     private int previousData;
     private int amount;
-}
+    private  int tariff;
+    private int cost;
+
+
+    }

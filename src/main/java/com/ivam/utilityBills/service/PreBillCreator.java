@@ -63,15 +63,16 @@ public class PreBillCreator implements PreBillCreatorInterface {
         this.previousMeterDataList = getMetersDataForCheckDate(checkDateId);
     }
 
-//TODO переделать метод для использования в цикле для извлечения данных по очереди из списка
-public String getMeterDataName (){
-    String metername = currentMetersDataList.get(1).getMeter().getName();
-    Date verificationDate = currentCheckDate.getVerificationDate();
-    SimpleDateFormat format = new SimpleDateFormat("MM/YYYY");
-    String dateForName = format.format(verificationDate);
-    String name = metername + " - " + dateForName;
-    return name;
-}
+
+    public String getMeterDataName(int id) {
+        String metername = currentMetersDataList.get(id).getMeter().getName();
+        Date verificationDate = currentCheckDate.getVerificationDate();
+        SimpleDateFormat format = new SimpleDateFormat("MM/YYYY");
+        String dateForName = format.format(verificationDate);
+        String name = metername + " - " + dateForName;
+        return name;
+    }
+
 
 }
 

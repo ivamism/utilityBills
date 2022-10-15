@@ -24,7 +24,7 @@ public class CheckDate {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date verificationDate;
 
-//TODO Check how it works if @ToString.Exclud
+//TODO Check how it works if @ToString.Exclud and Fetch type is Eager
     @ToString.Exclude
     @ManyToMany(mappedBy = "checkDates", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     private List<MetersData> metersDatas = new ArrayList<>();
