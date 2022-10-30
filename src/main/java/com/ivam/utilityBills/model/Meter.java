@@ -1,7 +1,14 @@
 package com.ivam.utilityBills.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 public class Meter {
     @Id
@@ -22,8 +29,8 @@ public class Meter {
 
 
     //  Constructors
-    public Meter() {
-    }
+//    public Meter() {
+//    }
 
     public Meter(int id) {
         this.id = id;
@@ -49,12 +56,12 @@ public class Meter {
         this.name = name;
     }
 
-    public Meter(int id, String name, MeterType metertype, Owners owner) {
-        this.id = id;
-        this.name = name;
-        this.metertype = metertype;
-        this.owner = owner;
-    }
+//    public Meter(int id, String name, MeterType metertype, Owners owner) {
+//        this.id = id;
+//        this.name = name;
+//        this.metertype = metertype;
+//        this.owner = owner;
+//    }
 
     public Meter(String name, MeterType metertype, Owners owner) {
         this.name = name;
@@ -63,45 +70,45 @@ public class Meter {
     }
     //Getters & Setters
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public MeterType getMetertype() {
-        return metertype;
-    }
-
-    public void setMetertype(MeterType metertype) {
-        this.metertype = metertype;
-    }
-
-    public Owners getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owners owner) {
-        this.owner = owner;
-    }
-
-    @Override
-    public String toString() {
-        return "Meter{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", metertype=" + metertype +
-                ", owner=" + owner +
-                '}';
-    }
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public MeterType getMetertype() {
+//        return metertype;
+//    }
+//
+//    public void setMetertype(MeterType metertype) {
+//        this.metertype = metertype;
+//    }
+//
+//    public Owners getOwner() {
+//        return owner;
+//    }
+//
+//    public void setOwner(Owners owner) {
+//        this.owner = owner;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "Meter{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", metertype=" + metertype +
+//                ", owner=" + owner +
+//                '}';
+//    }
 }

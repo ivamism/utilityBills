@@ -19,8 +19,6 @@ public class Owners {
     private double share;
     private boolean isCommonUser;
 //    private boolean isActive;
-
-
 }
 
 

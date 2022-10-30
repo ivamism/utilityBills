@@ -84,6 +84,17 @@ class PreBillCreatorTest {
         assertNotNull(previous);
     }
 
+    @Test
+    void preBillListCreator() {
+        preBillCreator.setCurrentCheckDate();
+        preBillCreator.setCurrentMetersDataList();
+        preBillCreator.setPreviousCheckDate();
+        preBillCreator.setPreviousMeterDataList();
+        List<PreBill> preBillList = preBillCreator.preBillListCreator();
+        assertNotNull(preBillList);
+
+    }
+
 //    @Test
 //    void getMeterDataName() {
 //        preBillCreator.setCurrentCheckDate();

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -71,6 +71,27 @@ public class PreBillCreator implements PreBillCreatorInterface {
         String dateForName = format.format(verificationDate);
         String name = metername + " - " + dateForName;
         return name;
+    }
+
+    List<PreBill> preBillListCreator(){
+        List<PreBill> preBills = new ArrayList<>();
+        int length = currentMetersDataList.size();
+
+        for (int i = 0; i < length; i++) {
+            String name = getMeterDataName(i);
+            int currentMetersData = currentMetersDataList.get(i).getValue();
+            int previousMetersData = previousMeterDataList.get(i).getValue();
+            boolean isCommonUser = previousMeterDataList.get(i).getMeter().getOwner().isCommonUser();
+
+            PreBill preBill = new PreBill();
+            preBill.setName(name);
+            preBill.setCurrentData(currentMetersData);
+            preBill.setPreviousData(previousMetersData);
+            preBill.setStatus(isCommonUser);
+
+            preBills.add(preBill);
+        }
+        return preBills;
     }
 
 

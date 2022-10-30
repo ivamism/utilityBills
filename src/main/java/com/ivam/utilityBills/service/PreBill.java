@@ -14,9 +14,13 @@ public class PreBill {
     private String name;
     private int currentData;
     private int previousData;
-    private int amount;
-    private  int tariff;
-    private int cost;
+    private  boolean status;
+//    private int amount;
+//    private  int tariff;
+//    private int cost;
 
-
+//    int amountCalculator() {
+//
+//        return amount= currentData-previousData;
+//    }
     }
