@@ -9,8 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class PreBillCreatorTest {
@@ -98,26 +97,28 @@ class PreBillCreatorTest {
 
     }
 
-    @Test
-    void isEquals() {
-        preBillCreator.setCurrentCheckDate();
-        preBillCreator.setCurrentMetersDataList();
-        preBillCreator.setPreviousCheckDate();
-        preBillCreator.setPreviousMeterDataList();
-        boolean result = preBillCreator.isEquals();
-        boolean expected = true;
-        assertEquals( expected, result);
-    }
-    @Test
-    void isEquals2() {
-        preBillCreator.setCurrentCheckDate();
-        preBillCreator.setCurrentMetersDataList();
-        preBillCreator.setPreviousCheckDate();
-        preBillCreator.setPreviousMeterDataList();
-        boolean result = preBillCreator.isEquals();
-        boolean expected = false;
-        assertEquals(expected, result);
-    }
+//    @Test
+//    void isEquals() {
+//        preBillCreator.setCurrentCheckDate();
+//        preBillCreator.setCurrentMetersDataList();
+//        preBillCreator.setPreviousCheckDate();
+//        preBillCreator.setPreviousMeterDataList();
+//        boolean result = preBillCreator.isEquals();
+//        assertTrue(result);
+////        boolean expected = true;
+////        assertEquals( expected, result);
+//    }
+//    @Test
+//    void isEquals2() {
+//        preBillCreator.setCurrentCheckDate();
+//        preBillCreator.setCurrentMetersDataList();
+//        preBillCreator.setPreviousCheckDate();
+//        preBillCreator.setPreviousMeterDataList();
+//        boolean result = preBillCreator.isEquals();
+////        boolean expected = false;
+////        assertEquals(expected, result);
+//        assertTrue(result);
+//    }
 //    @Test
 //    void getMeterDataName() {
 //        preBillCreator.setCurrentCheckDate();

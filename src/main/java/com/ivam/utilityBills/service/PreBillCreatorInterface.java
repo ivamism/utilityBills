@@ -9,11 +9,6 @@ import java.util.List;
 
 public interface PreBillCreatorInterface {
 
-//    CheckDate getByMaxId();
-
-//Integer getMaxId();
-
 List<CheckDate> findTwoLastCheckDates();
 List<MetersData> getMetersDataForCheckDate(int id);
-
 }
