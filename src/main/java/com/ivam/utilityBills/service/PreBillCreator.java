@@ -64,36 +64,58 @@ public class PreBillCreator implements PreBillCreatorInterface {
     }
 
 
-    public String getMeterDataName(int id) {
-        String metername = currentMetersDataList.get(id).getMeter().getName();
+public String getCurrentMeterName (int id) {
+    String name = currentMetersDataList.get(id).getMeter().getName();
+    return name;
+}public String getPreviousMeterName (int id) {
+    String name = previousMeterDataList.get(id).getMeter().getName();
+    return name;
+}
+
+
+    public String getMeterDataName  (int id) {
+        String meterName  = getCurrentMeterName (id);
         Date verificationDate = currentCheckDate.getVerificationDate();
-        SimpleDateFormat format = new SimpleDateFormat("MM/YYYY");
+        SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
         String dateForName = format.format(verificationDate);
-        String name = metername + " - " + dateForName;
-        return name;
+        return meterName + " - " + dateForName;
     }
 
     List<PreBill> preBillListCreator(){
         List<PreBill> preBills = new ArrayList<>();
-        int length = currentMetersDataList.size();
+//        int length = currentMetersDataList.size();
 
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < currentMetersDataList.size(); i++) {
             String name = getMeterDataName(i);
-            int currentMetersData = currentMetersDataList.get(i).getValue();
-            int previousMetersData = previousMeterDataList.get(i).getValue();
-            boolean isCommonUser = previousMeterDataList.get(i).getMeter().getOwner().isCommonUser();
+            int currentValue = currentMetersDataList.get(i).getValue();
+            int previousValue = 0;
+//            boolean isCommonUser = previousMeterDataList.get(i).getMeter().getOwner().isCommonUser();
+            boolean isCommonUser = currentMetersDataList.get(i).getMeter().getOwner().isCommonUser();
+
+//            int previousMetersData = 0;
+            for (int j = 0; j < previousMeterDataList.size(); j++) {
+                if (getCurrentMeterName(i).equals(getPreviousMeterName(j))) {
+                    previousValue = previousMeterDataList.get(j).getValue();
+                    break;
+                }
+            }
 
             PreBill preBill = new PreBill();
             preBill.setName(name);
-            preBill.setCurrentData(currentMetersData);
-            preBill.setPreviousData(previousMetersData);
+            preBill.setCurrentData(currentValue);
+            preBill.setPreviousData(previousValue);
             preBill.setStatus(isCommonUser);
 
             preBills.add(preBill);
         }
         return preBills;
     }
+    boolean isEquals(){
+        boolean equals = getCurrentMeterName(0).equals(getPreviousMeterName(1));
 
+        return equals;
+    }
+//todo проверить соответствие current i previous выборку. В случае необходимости вставить проверку на валидность и поиск соответствия.
 
 }
 

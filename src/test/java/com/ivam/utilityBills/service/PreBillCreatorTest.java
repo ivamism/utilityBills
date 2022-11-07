@@ -18,6 +18,9 @@ class PreBillCreatorTest {
     @Autowired
     PreBillCreator preBillCreator = new PreBillCreator();
 
+    @Autowired
+    PreBill preBill = new PreBill();
+
     @Disabled
     @Test
     void Checkdatessetter() {
@@ -95,6 +98,26 @@ class PreBillCreatorTest {
 
     }
 
+    @Test
+    void isEquals() {
+        preBillCreator.setCurrentCheckDate();
+        preBillCreator.setCurrentMetersDataList();
+        preBillCreator.setPreviousCheckDate();
+        preBillCreator.setPreviousMeterDataList();
+        boolean result = preBillCreator.isEquals();
+        boolean expected = true;
+        assertEquals( expected, result);
+    }
+    @Test
+    void isEquals2() {
+        preBillCreator.setCurrentCheckDate();
+        preBillCreator.setCurrentMetersDataList();
+        preBillCreator.setPreviousCheckDate();
+        preBillCreator.setPreviousMeterDataList();
+        boolean result = preBillCreator.isEquals();
+        boolean expected = false;
+        assertEquals(expected, result);
+    }
 //    @Test
 //    void getMeterDataName() {
 //        preBillCreator.setCurrentCheckDate();
