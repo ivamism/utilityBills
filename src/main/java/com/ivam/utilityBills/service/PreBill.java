@@ -15,12 +15,10 @@ public class PreBill {
     private int currentData;
     private int previousData;
     private  boolean status;
+    private String meterType;
 //    private int amount;
-//    private  int tariff;
+    private  double tariff;
 //    private int cost;
 
-//    int amountCalculator() {
-//
-//        return amount= currentData-previousData;
-//    }
+
     }
