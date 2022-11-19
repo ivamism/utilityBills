@@ -35,6 +35,9 @@ public class PreBillCreator implements PreBillCreatorInterface {
     List<MetersData> currentMetersDataList;
     List<MetersData> previousMeterDataList;
 
+    private int commonElectricityAmount;
+    private int commonGasAmount;
+
     List<PreBill> preBills = new ArrayList<>();
 
 //    private int commonElectricityAmount;
@@ -103,7 +106,7 @@ public class PreBillCreator implements PreBillCreatorInterface {
             }
 
             PreBill preBill = new PreBill();
-            preBill.setName(name);
+//            preBill.setName(name);
             preBill.setMeterType(type);
             preBill.setTariff(tariff);
             preBill.setCurrentData(currentValue);
@@ -114,10 +117,24 @@ public class PreBillCreator implements PreBillCreatorInterface {
         }
         return preBills;
     }
-//    int calculateCommonGasAmount(){
-//
-//        return 0;
-//    }
+
+    int calculateCommonGasAmount() {
+        for (int i = 0; i < preBills.size(); i++) {
+            boolean status = preBills.get(i).isStatus();
+            String type = preBills.get(i).getMeterType();
+
+            if (status && type.equals("Газ")) {
+                commonGasAmount = commonAmountCalculator(preBills.get(i).getCurrentData(), preBills.get(i).getPreviousData());
+            }
+            break;
+        }
+        return commonGasAmount;
+    }
+    int commonAmountCalculator(int current, int previous){
+        return current-previous;
+    }
+
+
 
 
 }

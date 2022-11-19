@@ -17,8 +17,8 @@ class PreBillCreatorTest {
     @Autowired
     PreBillCreator preBillCreator = new PreBillCreator();
 
-    @Autowired
-    PreBill preBill = new PreBill();
+//    @Autowired
+//    PreBill preBill = new PreBill();
 
     @Disabled
     @Test
@@ -94,6 +94,21 @@ class PreBillCreatorTest {
         preBillCreator.setPreviousMeterDataList();
         List<PreBill> preBillList = preBillCreator.preBillListCreator();
         assertNotNull(preBillList);
+
+    }
+
+    @Test
+    void calculateCommonGasAmount() {
+        preBillCreator.setCurrentCheckDate();
+        preBillCreator.setCurrentMetersDataList();
+        preBillCreator.setPreviousCheckDate();
+        preBillCreator.setPreviousMeterDataList();
+        preBillCreator.preBillListCreator();
+
+        int commonGasAmount = preBillCreator.calculateCommonGasAmount();
+        int unExpected = 0;
+
+        assertNotEquals(unExpected, commonGasAmount);
 
     }
 

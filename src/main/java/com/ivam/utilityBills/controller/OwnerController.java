@@ -20,7 +20,7 @@ public class OwnerController {
 
     @GetMapping("/ownerslist")
     public String findAll(Model model) {
-        List<Owners> owners = ownersRepository.findAllOderByIsActiveUserTrueDesk();
+        List<Owners> owners = ownersRepository.findAllByOderByIsActiveUserTrueDesk();
         model.addAttribute("ownerslist", owners);
         return "owners/ownerslist";
     }

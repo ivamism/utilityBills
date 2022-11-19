@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PreBill {
 
-    private String name;
+//    private String name;
     private int currentData;
     private int previousData;
     private  boolean status;

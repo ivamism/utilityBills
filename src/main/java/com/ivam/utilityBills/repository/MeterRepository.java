@@ -6,5 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MeterRepository extends JpaRepository<Meter, Integer> {
-//    List<Meter> findAllOderByOwner_Id();
+    List<Meter> findAllByOrderByNameAsc();
+
+
+    List<Meter> findAllByOrderByOwnerAsc();
+
+//    List<Meter> findAllByOrderByOwnerAscNameDesk();
+
+//    List<Meter> findAllByOrderByOwnerAscByOderByNameDesk();
 }

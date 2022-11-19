@@ -54,7 +54,7 @@ public class MeterDataController {
 
     @GetMapping("/add-metersdata")
     public String add(@RequestParam int id, Model model) {
-        List<Meter> metersList = meterRepository.findAll();
+        List<Meter> metersList = meterRepository.findAllByOrderByNameAsc();
         model.addAttribute("metersList", metersList);
         CheckDate checkDate = checkDateRepository.findById(id).get();
         model.addAttribute("checkdates", checkDate);
