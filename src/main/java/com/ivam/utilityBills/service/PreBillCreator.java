@@ -45,10 +45,6 @@ public class PreBillCreator implements PreBillCreatorInterface {
 
     List<PreBill> preBills = new ArrayList<>();
 
-//    private int commonElectricityAmount;
-//    private int commonGasAmount;
-//
-//    private List<Bill> billList = new ArrayList<>();
 
     @Override
     public List<CheckDate> findTwoLastCheckDates() {
@@ -125,22 +121,21 @@ public class PreBillCreator implements PreBillCreatorInterface {
 
     int calculateCommonGasAmount() {
         for (int i = 0; i < preBills.size(); i++) {
-            boolean status = preBills.get(i).isStatus();
-            String type = preBills.get(i).getMeterType();
+           PreBill prebill = preBills.get(i);
+            boolean status = prebill.isStatus();
+            String type = prebill.getMeterType();
 
             if (status && type.equals("Газ")) {
-                commonGasAmount = commonAmountCalculator(preBills.get(i).getCurrentData(), preBills.get(i).getPreviousData());
+                commonGasAmount = commonAmountCalculator(prebill.getCurrentData(), prebill.getPreviousData());
+                break;
             }
-            break;
+
         }
         return commonGasAmount;
     }
     int commonAmountCalculator(int current, int previous){
         return current-previous;
     }
-
-
-
 
 }
 
