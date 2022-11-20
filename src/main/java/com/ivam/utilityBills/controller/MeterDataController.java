@@ -1,5 +1,6 @@
 package com.ivam.utilityBills.controller;
 
+import com.ivam.utilityBills.ClassPreamble;
 import com.ivam.utilityBills.model.CheckDate;
 import com.ivam.utilityBills.model.Meter;
 import com.ivam.utilityBills.model.MetersData;
@@ -13,9 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
-
+@ClassPreamble(
+        application = "Utility Billing Application",
+        author = "@Author: Ivan Mochalov")
 @Controller
 public class MeterDataController {
 
@@ -27,8 +29,6 @@ public class MeterDataController {
 
     @Autowired
     MeterRepository meterRepository;
-
-
     @GetMapping("/metersdata")
     public String findAll(Model model) {
         List<MetersData> metersDataList = metersDataRepository.findAll();
@@ -38,7 +38,6 @@ public class MeterDataController {
 
     @GetMapping("/metersdata-for-checkdate")
     public String findAllByDate(@RequestParam int id, Model model) {
-//        Set<MetersData> metersDataList = metersDataRepository.getByCheckDates_IdOrderByMeter_IdAsc(id);
         List<MetersData> metersDataList = metersDataRepository.getByCheckDates_IdOrderByMeter_IdAsc(id);
         model.addAttribute("metersdatalist", metersDataList);
         CheckDate checkDate = checkDateRepository.findById(id).get();

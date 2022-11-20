@@ -1,5 +1,6 @@
 package com.ivam.utilityBills.controller;
 
+import com.ivam.utilityBills.ClassPreamble;
 import com.ivam.utilityBills.model.CheckDate;
 import com.ivam.utilityBills.model.MetersData;
 import com.ivam.utilityBills.repository.CheckDateRepository;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
+
+@ClassPreamble(
+        application = "Utility Billing Application",
+        author = "@Author: Ivan Mochalov")
 
 @Controller
 public class CheckDateController {
@@ -23,7 +27,6 @@ public class CheckDateController {
 
     @Autowired
     CheckDateRepository checkDateRepository;
-
 
     @GetMapping("/checkdate")
     public String findAllByOrderByIdDesc(Model model) {
@@ -45,8 +48,6 @@ public class CheckDateController {
         model.addAttribute("checkdates", checkDate);
         return "checkdate/checkdatelast";
     }
-
-
 
     @GetMapping("/delete-checkdate")
     public String delete(@RequestParam int id) {

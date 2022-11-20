@@ -1,5 +1,6 @@
 package com.ivam.utilityBills.service;
 
+import com.ivam.utilityBills.ClassPreamble;
 import com.ivam.utilityBills.model.CheckDate;
 import com.ivam.utilityBills.model.MetersData;
 import com.ivam.utilityBills.repository.CheckDateRepository;
@@ -19,6 +20,10 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+
+@ClassPreamble(
+        application = "Utility Billing Application",
+        author = "@Author: Ivan Mochalov")
 
 @Service
 public class PreBillCreator implements PreBillCreatorInterface {

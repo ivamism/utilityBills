@@ -2,7 +2,9 @@ package com.ivam.utilityBills;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+@ClassPreamble(
+		application = "Utility Billing Application",
+		author = "@Author: Ivan Mochalov")
 @SpringBootApplication
 public class UtilityBillsApplication {
 
@@ -22,7 +24,5 @@ public class UtilityBillsApplication {
 //		tariffsRepository.save(new Tariffs("Electricity", 0.1977));
 //		System.out.println(tariffsRepository.findAll());
 //		System.out.println(familyRepository.findAll());
-
 	}
-
 }

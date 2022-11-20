@@ -1,7 +1,7 @@
 package com.ivam.utilityBills.model;
 
+import com.ivam.utilityBills.ClassPreamble;
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -12,6 +12,11 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode
 @ToString
+
+@ClassPreamble(
+        application = "Utility Billing Application",
+        author = "@Author: Ivan Mochalov")
+
 
 @Entity
 public class MetersData {
@@ -31,7 +36,6 @@ public class MetersData {
             joinColumns = @JoinColumn(name = "meters_datas_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "check_date_null", referencedColumnName = "id"))
     private Set<CheckDate> checkDates = new LinkedHashSet<>();
-
 }
 
 

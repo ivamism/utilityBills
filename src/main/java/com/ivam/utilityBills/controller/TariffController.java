@@ -2,6 +2,7 @@ package com.ivam.utilityBills.controller;
 
 
 
+import com.ivam.utilityBills.ClassPreamble;
 import com.ivam.utilityBills.model.Tariff;
 import com.ivam.utilityBills.repository.MeterTypeRepository;
 import com.ivam.utilityBills.repository.TariffRepository;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+@ClassPreamble(
+        application = "Utility Billing Application",
+        author = "@Author: Ivan Mochalov")
 @Controller
 public class TariffController {
 

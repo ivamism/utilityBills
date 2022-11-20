@@ -1,5 +1,6 @@
 package com.ivam.utilityBills.model;
 
+import com.ivam.utilityBills.ClassPreamble;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,6 +15,10 @@ import java.util.*;
 @Setter
 @ToString
 
+@ClassPreamble(
+        application = "Utility Billing Application",
+        author = "@Author: Ivan Mochalov")
+
 @Entity
 public class CheckDate {
     @Id
@@ -24,9 +29,8 @@ public class CheckDate {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date verificationDate;
 
-//TODO Check how it works if @ToString.Exclud and Fetch type is Eager
+//TODO Check how it works if @ToString.Exclude and Fetch type is Eager
     @ToString.Exclude
     @ManyToMany(mappedBy = "checkDates", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    private List<MetersData> metersDatas = new ArrayList<>();
-
+    private List<MetersData> metersData = new ArrayList<>();
 }

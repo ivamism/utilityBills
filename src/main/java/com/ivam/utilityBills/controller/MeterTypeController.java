@@ -1,6 +1,6 @@
 package com.ivam.utilityBills.controller;
 
-
+import com.ivam.utilityBills.ClassPreamble;
 import com.ivam.utilityBills.model.MeterType;
 import com.ivam.utilityBills.repository.MeterTypeRepository;
 import com.ivam.utilityBills.repository.TariffRepository;
@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
+
+@ClassPreamble(
+        application = "Utility Billing Application",
+        author = "@Author: Ivan Mochalov")
 
 @Controller
 public class MeterTypeController {
