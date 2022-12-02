@@ -1,6 +1,5 @@
 package com.ivam.utilityBills.model;
 
-import com.ivam.utilityBills.ClassPreamble;
 import lombok.*;
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -13,11 +12,7 @@ import java.util.Set;
 @EqualsAndHashCode
 @ToString
 
-@ClassPreamble(
-        application = "Utility Billing Application",
-        author = "@Author: Ivan Mochalov")
-
-
+//Todo rename this class to MetersReading
 @Entity
 public class MetersData {
     @Id

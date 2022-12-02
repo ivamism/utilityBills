@@ -1,7 +1,6 @@
 package com.ivam.utilityBills.controller;
 
 
-import com.ivam.utilityBills.ClassPreamble;
 import com.ivam.utilityBills.model.Owners;
 import com.ivam.utilityBills.model.Meter;
 import com.ivam.utilityBills.model.MeterType;
@@ -28,9 +27,6 @@ public class MeterController {
     @Autowired
     OwnersRepository ownersRepository;
 
-    @ClassPreamble(
-            application = "Utility Billing Application",
-            author = "@Author: Ivan Mochalov")
     @GetMapping("/meters")
     public String findAll(Model model) {
         List<Meter> meterList = meterRepository.findAllByOrderByOwnerAsc();

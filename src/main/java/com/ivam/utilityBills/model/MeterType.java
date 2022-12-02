@@ -1,6 +1,5 @@
 package com.ivam.utilityBills.model;
 
-import com.ivam.utilityBills.ClassPreamble;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,10 +9,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-
-@ClassPreamble(
-        application = "Utility Billing Application",
-        author = "@Author: Ivan Mochalov")
 
 @Entity
 public class MeterType {

@@ -1,6 +1,5 @@
 package com.ivam.utilityBills.model;
 
-import com.ivam.utilityBills.ClassPreamble;
 import lombok.*;
 import javax.persistence.*;
 @Getter
@@ -8,10 +7,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-
-@ClassPreamble(
-        application = "Utility Billing Application",
-        author = "@Author: Ivan Mochalov")
 
 @Entity
 @Table (name = "owners")
@@ -21,7 +16,7 @@ public class Owners {
     private int id;
     private String name;
 //    private int registeredQuantity;
-    private double share;
+    private float share;
     private boolean isCommonUser;
 //    private boolean isActive;
 }

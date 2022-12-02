@@ -1,6 +1,5 @@
-package com.ivam.utilityBills.service;
+package com.ivam.utilityBills.model;
 
-import com.ivam.utilityBills.ClassPreamble;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +11,6 @@ import org.springframework.stereotype.Service;
 @ToString
 @Service
 
-@ClassPreamble(
-        application = "Utility Billing Application",
-        author = "@Author: Ivan Mochalov")
 public class PreBill {
 
     //    private String name;

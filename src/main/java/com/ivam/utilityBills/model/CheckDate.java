@@ -1,23 +1,18 @@
 package com.ivam.utilityBills.model;
 
-import com.ivam.utilityBills.ClassPreamble;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.*;
 
-// TODO think to rename  this class
+// TODO think to rename  this class to, for example, MetersVerificationDate or DateOfMetersReading
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-
-@ClassPreamble(
-        application = "Utility Billing Application",
-        author = "@Author: Ivan Mochalov")
 
 @Entity
 public class CheckDate {

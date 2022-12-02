@@ -1,6 +1,5 @@
 package com.ivam.utilityBills.model;
 
-import com.ivam.utilityBills.ClassPreamble;
 import lombok.*;
 import javax.persistence.*;
 
@@ -10,9 +9,6 @@ import javax.persistence.*;
 @Setter
 @ToString
 
-@ClassPreamble(
-        application = "Utility Billing Application",
-        author = "@Author: Ivan Mochalov")
 @Entity
 @Table(name = "tariffs")
 
@@ -22,5 +18,5 @@ public class Tariff {
     private int id;
 
     private String name;
-    private double value;
+    private float value;
 }

@@ -1,8 +1,8 @@
 package com.ivam.utilityBills.service;
 
-import com.ivam.utilityBills.ClassPreamble;
 import com.ivam.utilityBills.model.CheckDate;
 import com.ivam.utilityBills.model.MetersData;
+import com.ivam.utilityBills.model.PreBill;
 import com.ivam.utilityBills.repository.CheckDateRepository;
 import com.ivam.utilityBills.repository.MetersDataRepository;
 import lombok.*;
@@ -21,13 +21,10 @@ import java.util.List;
 @Setter
 @ToString
 
-@ClassPreamble(
-        application = "Utility Billing Application",
-        author = "@Author: Ivan Mochalov")
-
 @Service
 public class PreBillCreator implements PreBillCreatorInterface {
     //TODO Think to rename class
+    //TODO change access modifiers for fields to private
     @Autowired
     CheckDateRepository checkDateRepository;
 
@@ -45,12 +42,12 @@ public class PreBillCreator implements PreBillCreatorInterface {
 
     List<PreBill> preBills = new ArrayList<>();
 
-
+//Get From DB List of two last meters verification dates, means for current and previous periods
     @Override
     public List<CheckDate> findTwoLastCheckDates() {
         return checkDateRepository.findTop2AllByOrderByVerificationDateDesc();
     }
-
+//and set these dates to proper fields
     void setCurrentCheckDate() {
         currentCheckDate = findTwoLastCheckDates().get(0);
     }
@@ -59,6 +56,7 @@ public class PreBillCreator implements PreBillCreatorInterface {
         previousCheckDate = findTwoLastCheckDates().get(1);
     }
 
+//get a  lists of meters readings for these dates and set it to proper fields
     @Override
     public List<MetersData> getMetersDataForCheckDate(int id) {
         return metersDataRepository.findAllByCheckDates_Id(id);
@@ -82,20 +80,20 @@ public class PreBillCreator implements PreBillCreatorInterface {
         return previousMeterDataList.get(id).getMeter().getName();
     }
 
-    public String getMeterDataName(int id) {
-        String meterName = getCurrentMeterName(id);
-        Date verificationDate = currentCheckDate.getVerificationDate();
-        SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
-        String dateForName = format.format(verificationDate);
-        return meterName + " - " + dateForName;
-    }
+//    public String getMeterDataName(int id) {
+//        String meterName = getCurrentMeterName(id);
+//        Date verificationDate = currentCheckDate.getVerificationDate();
+//        SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
+//        String dateForName = format.format(verificationDate);
+//        return meterName + " - " + dateForName;
+//    }
 
     List<PreBill> preBillListCreator() {
         for (int i = 0; i < currentMetersDataList.size(); i++) {
-            String name = getMeterDataName(i);
+//            String name = getMeterDataName(i);
             int currentValue = currentMetersDataList.get(i).getValue();
             String type = currentMetersDataList.get(i).getMeter().getMetertype().getName();
-            double tariff = currentMetersDataList.get(i).getMeter().getMetertype().getTariff().getValue();
+            float tariff = currentMetersDataList.get(i).getMeter().getMetertype().getTariff().getValue();
             boolean isCommonUser = currentMetersDataList.get(i).getMeter().getOwner().isCommonUser();
             int previousValue = 0;
 
@@ -119,23 +117,53 @@ public class PreBillCreator implements PreBillCreatorInterface {
         return preBills;
     }
 
+//    Stream<PreBill> preBillStream = preBills.stream();
+//    Stream<PreBill> commonGasAmountStream = preBillStream.filter(preBills ->  preBills.isStatus() )
+//            .filter(preBills -> "Газовый".equals(preBills.getMeterType()));
+
+
+
+
+
     int calculateCommonGasAmount() {
         for (int i = 0; i < preBills.size(); i++) {
            PreBill prebill = preBills.get(i);
             boolean status = prebill.isStatus();
             String type = prebill.getMeterType();
 
-            if (status && type.equals("Газ")) {
-                commonGasAmount = commonAmountCalculator(prebill.getCurrentData(), prebill.getPreviousData());
+            if (status && type.equals("Газовый")) {
+                commonGasAmount = amountCalculator(prebill.getCurrentData(), prebill.getPreviousData());
                 break;
             }
 
         }
         return commonGasAmount;
     }
-    int commonAmountCalculator(int current, int previous){
+    int calculateCommonElectricityAmount() {
+        for (int i = 0; i < preBills.size(); i++) {
+           PreBill prebill = preBills.get(i);
+            boolean status = prebill.isStatus();
+            String type = prebill.getMeterType();
+
+            if (status && type.equals("Электрический")) {
+                commonElectricityAmount = amountCalculator(prebill.getCurrentData(), prebill.getPreviousData());
+                break;
+            }
+        }
+        return commonElectricityAmount;
+    }
+
+    int amountCalculator(int current, int previous){
         return current-previous;
     }
+    int privateGasAmountCalculator(int commonGasAmount, float share){
+
+        return Math.round(commonGasAmount*share);
+    }
+int privateElecrticityAmountCalculator () {
+
+    return 0;
+}
 
 }
 
