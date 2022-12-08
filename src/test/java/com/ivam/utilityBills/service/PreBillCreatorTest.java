@@ -1,88 +1,19 @@
 package com.ivam.utilityBills.service;
 
-import com.ivam.utilityBills.model.CheckDate;
-import com.ivam.utilityBills.model.MetersData;
 import com.ivam.utilityBills.model.PreBill;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class PreBillCreatorTest {
 
     @Autowired
     PreBillCreator preBillCreator = new PreBillCreator();
-
-    @Disabled
-    @Test
-    void Checkdatessetter() {
-        preBillCreator.setCurrentCheckDate();
-        preBillCreator.setPreviousCheckDate();
-    }
-
-    @Disabled
-    @Test
-    void getCurrentCheckDate() {
-        CheckDate currentCheckDate = preBillCreator.currentCheckDate;
-        assertNotNull(currentCheckDate);
-    }
-
-    @Disabled
-    @Test
-    void getPreviousCheckDate() {
-        CheckDate previousCheckDate = preBillCreator.previousCheckDate;
-        assertNotNull(previousCheckDate);
-    }
-
-    //@Disabled
-//    @Test
-//    void getMeterDataName() {
-//        preBillCreator.setCurrentCheckDate();
-//        preBillCreator.setCurrentMetersData();
-//        String meterDataName = preBillCreator.getMeterDataName();
-//        String expected = "Газовый общий";
-//        assertEquals(expected, meterDataName);
-//    }
-    @Disabled
-    @Test
-    void getCurrentMetersDataSet() {
-//        preBillCreator.setCurrentCheckDate();
-//        preBillCreator.setPreviousCheckDate();
-        List<MetersData> currentMetersData = preBillCreator.getCurrentMetersDataList();
-
-        assertNotNull(currentMetersData);
-    }
-
-    @Disabled
-    @Test
-    void setCurrentMetersDataList() {
-        preBillCreator.setCurrentMetersDataList();
-    }
-
-    @Disabled
-    @Test
-    void setPreviousMeterDataList() {
-        preBillCreator.setPreviousMeterDataList();
-    }
-
-    @Disabled
-    @Test
-    void getCurrentMetersDataList() {
-        List<MetersData> current = preBillCreator.getCurrentMetersDataList();
-        assertNotNull(current);
-    }
-
-    @Disabled
-    @Test
-    void getPreviousMetersDataSet() {
-        CheckDate previous = preBillCreator.getPreviousCheckDate();
-        assertNotNull(previous);
-    }
 
     @Test
     void preBillListCreator() {
@@ -92,69 +23,75 @@ class PreBillCreatorTest {
         preBillCreator.setPreviousMeterDataList();
         List<PreBill> preBillList = preBillCreator.preBillListCreator();
         assertNotNull(preBillList);
-
     }
-
     @Test
-    void calculateCommonGasAmount() {
+    void preBillListCreator2 () {
         preBillCreator.setCurrentCheckDate();
         preBillCreator.setCurrentMetersDataList();
         preBillCreator.setPreviousCheckDate();
         preBillCreator.setPreviousMeterDataList();
-        preBillCreator.preBillListCreator();
-
-        int commonGasAmount = preBillCreator.calculateCommonGasAmount();
-        int unExpected = 0;
-
-        assertNotEquals(unExpected, commonGasAmount);
-
+        List<PreBill> preBillList = preBillCreator.preBillListCreator();
+        int size = preBillList.size();
+        int expected = 5;
+        assertEquals(expected, size);
     }
 
+
     @Test
-    void calculateCommonGasAmount2() {
+    void getCommonMeters() {
         preBillCreator.setCurrentCheckDate();
         preBillCreator.setCurrentMetersDataList();
         preBillCreator.setPreviousCheckDate();
         preBillCreator.setPreviousMeterDataList();
-        preBillCreator.preBillListCreator();
+                preBillListCreator();
+                List<PreBill> common = preBillCreator.preBills
+                .stream().filter(preBills -> preBills.isStatus())
+                .collect(Collectors.toList());
+//        preBillCreator.commonMeters
 
-        int commonGasAmount = preBillCreator.calculateCommonGasAmount();
-        int Expected = 500;
+//        preBillCreator.getCommonMeters();
 
-        assertEquals(Expected, commonGasAmount);
-
+//        List<PreBill> commonMeters = preBillCreator.commonMeters;
+//         commonMeters.size();
+        int size = common.size();
+        int expected = 2;
+        assertEquals(expected, size);
     }
 
     @Test
-    void calculateCommonElectricityAmount() {
+    void getPrivateMeters() {
         preBillCreator.setCurrentCheckDate();
         preBillCreator.setCurrentMetersDataList();
         preBillCreator.setPreviousCheckDate();
         preBillCreator.setPreviousMeterDataList();
-        preBillCreator.preBillListCreator();
+        preBillListCreator();
+        List<PreBill> privateMeters = preBillCreator.preBills
+                .stream().filter(preBills -> !preBills.isStatus())
+                .collect(Collectors.toList());
 
-        int commonElectricityAmount = preBillCreator.calculateCommonElectricityAmount();
-        int Expected = 200;
-
-        assertEquals(Expected, commonElectricityAmount);
+//        List<PreBill> privateMeters = preBillCreator.privateMeters;
+        int size = privateMeters.size();
+        int expected = 3;
+        assertEquals(expected, size);
     }
 
+    @Test
+    void getCommonGasAmount() {
+        preBillCreator.setCurrentCheckDate();
+        preBillCreator.setCurrentMetersDataList();
+        preBillCreator.setPreviousCheckDate();
+        preBillCreator.setPreviousMeterDataList();
+        preBillListCreator();
+        Integer common = preBillCreator.preBills
+                .stream().filter(preBills -> preBills.isStatus())
+                .filter(preBills -> "Газовый".equals(preBills.getMeterType()))
+                .reduce(0,(x,y)-> {
+                    return x + y.getAmount();
+                }, (x, y)->x+y);
 
-//    @Test
-//    void getMeterDataName() {
-//        preBillCreator.setCurrentCheckDate();
-//        preBillCreator.setCurrentMetersDataList();
-//        String meterDataName = preBillCreator.getMeterDataName(1);
-//        assertNotNull(meterDataName);
-//    }
-//
-//    @Test
-//    void getMeterDataName2() {
-//        preBillCreator.setCurrentCheckDate();
-//        preBillCreator.setCurrentMetersDataList();
-//        String meterDataName = preBillCreator.getMeterDataName(1);
-//        String expected = "Электро общий - 04/2022";
-//        assertEquals(expected, meterDataName);
-//    }
 
+        int commonGasAmount = preBillCreator.getCommonGasAmount();
+        int expected = 500;
+        assertEquals(expected, commonGasAmount);
+    }
 }

@@ -18,8 +18,8 @@ public class PreBill {
     private int previousData;
     private boolean status;
     private String meterType;
-    //    private int amount;
-    private double tariff;
+    private int amount;
+    private float tariff;
 //    private int cost;
 
 }
