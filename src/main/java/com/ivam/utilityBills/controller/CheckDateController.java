@@ -2,7 +2,7 @@ package com.ivam.utilityBills.controller;
 
 import com.ivam.utilityBills.model.CheckDate;
 import com.ivam.utilityBills.repository.CheckDateRepository;
-import com.ivam.utilityBills.service.PreBillCreator;
+import com.ivam.utilityBills.service.Calculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import java.util.List;
 public class CheckDateController {
 
     @Autowired
-    PreBillCreator preBillCreator;
+    Calculator calculator;
 
     @Autowired
     CheckDateRepository checkDateRepository;
@@ -30,14 +30,14 @@ public class CheckDateController {
 
     @GetMapping("/checkdateonlytwo")
     public String findTopTwo(Model model) {
-        List<CheckDate> checkDates = preBillCreator.findTwoLastCheckDates();
+        List<CheckDate> checkDates = calculator.findTwoLastCheckDates();
         model.addAttribute("checkdates", checkDates);
         return "checkdate/checkdateonlytwo";
     }
 
     @GetMapping("/checkdatelast")
     public String getLastChekDate(Model model) {
-        CheckDate checkDate = preBillCreator.findTwoLastCheckDates().get(1);
+        CheckDate checkDate = calculator.findTwoLastCheckDates().get(1);
         model.addAttribute("checkdates", checkDate);
         return "checkdate/checkdatelast";
     }

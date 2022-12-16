@@ -2,7 +2,7 @@ package com.ivam.utilityBills.service;
 
 import com.ivam.utilityBills.model.CheckDate;
 import com.ivam.utilityBills.model.MetersData;
-import com.ivam.utilityBills.model.PreBill;
+import com.ivam.utilityBills.model.PreliminaryBill;
 import com.ivam.utilityBills.repository.CheckDateRepository;
 import com.ivam.utilityBills.repository.MetersDataRepository;
 import lombok.*;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @NoArgsConstructor
@@ -22,26 +21,25 @@ import java.util.stream.Stream;
 @ToString
 
 @Service
-public class PreBillCreator implements PreBillCreatorInterface {
+public class Calculator implements CalculatorInterface {
     //TODO Think to rename class
-    //TODO change access modifiers for fields to private
     @Autowired
     CheckDateRepository checkDateRepository;
 
     @Autowired
     MetersDataRepository metersDataRepository;
 
-    CheckDate currentCheckDate;
-    CheckDate previousCheckDate;
+    private CheckDate currentCheckDate;
+    private CheckDate previousCheckDate;
 
-    List<MetersData> currentMetersDataList;
-    List<MetersData> previousMeterDataList;
+    private List<MetersData> currentMetersDataList;
+    private List<MetersData> previousMeterDataList;
 
     private int commonElectricityAmount;
     private int commonGasAmount;
     private int sumOfPrivateElectricityAmounts;
 
-    List<PreBill> preBills = new ArrayList<>();
+    private List<PreliminaryBill> preliminaryBills = new ArrayList<>();
 
     //Get From DB List of two last meters verification dates, means for current and previous periods
     @Override
@@ -58,7 +56,7 @@ public class PreBillCreator implements PreBillCreatorInterface {
         previousCheckDate = findTwoLastCheckDates().get(1);
     }
 
-    //get a  lists of meters readings for these dates and set it to proper fields
+    //get a  Lists of meters readings for these dates and set it to proper fields
     @Override
     public List<MetersData> getMetersDataForCheckDate(int id) {
         return metersDataRepository.findAllByCheckDates_Id(id);
@@ -90,9 +88,9 @@ public class PreBillCreator implements PreBillCreatorInterface {
 //        return meterName + " - " + dateForName;
 //    }
 
-    List<PreBill> preBillListCreator() {
+    //    Method create a List of preliminary bills for each meter, which prepare data for final bills for each owner
+    List<PreliminaryBill> preBillListCreator() {
         for (int i = 0; i < currentMetersDataList.size(); i++) {
-//            String name = getMeterDataName(i);
             int currentValue = currentMetersDataList.get(i).getValue();
             String type = currentMetersDataList.get(i).getMeter().getMetertype().getName();
             float tariff = currentMetersDataList.get(i).getMeter().getMetertype().getTariff().getValue();
@@ -105,90 +103,61 @@ public class PreBillCreator implements PreBillCreatorInterface {
                     previousValue = previousMeterDataList.get(j).getValue();
                     break;
                 }
-//                int amount = amountCalculator(currentValue, previousValue);
             }
 
-            PreBill preBill = new PreBill();
-//            preBill.setName(name);
-            preBill.setMeterType(type);
-            preBill.setTariff(tariff);
-            preBill.setCurrentData(currentValue);
-            preBill.setPreviousData(previousValue);
-            preBill.setStatus(isCommonUser);
-            preBill.setAmount(amountCalculator(currentValue, previousValue));
+            PreliminaryBill preliminaryBill = new PreliminaryBill();
+            preliminaryBill.setMeterType(type);
+            preliminaryBill.setTariff(tariff);
+            preliminaryBill.setCurrentData(currentValue);
+            preliminaryBill.setPreviousData(previousValue);
+            preliminaryBill.setStatus(isCommonUser);
+            preliminaryBill.setAmount(amountCalculator(currentValue, previousValue));
 
-            preBills.add(preBill);
+            preliminaryBills.add(preliminaryBill);
         }
-        return preBills;
+        return preliminaryBills;
     }
-//separate prebills List for common meters and for private Lists
-//    List<PreBill> commonMetersPreBills = preBills.stream().filter(preBills -> preBills.isStatus())
-//            .collect(Collectors.toList());
-    List<PreBill> privateMetersPreBills = preBills.stream().filter(preBills -> !preBills.isStatus())
-            .collect(Collectors.toList());
 
+//separate prebills List for common and for private owners Lists
+
+    List<PreliminaryBill> commonOwnersPreBills() {
+        return preliminaryBills.stream().filter(preliminaryBills -> preliminaryBills.isStatus())
+                .collect(Collectors.toList());
+    }
+
+    List<PreliminaryBill> privateOwnersPreBills() {
+        return preliminaryBills.stream().filter(preliminaryBills -> !preliminaryBills.isStatus())
+                .collect(Collectors.toList());
+    }
 
 
     public int getCommonGasAmount() {
-        List<PreBill> commonMetersPreBills = preBills.stream().filter(preBills -> preBills.isStatus())
-            .collect(Collectors.toList());
-        commonGasAmount = commonMetersPreBills.stream()
-                .filter(preBills -> "Газовый".equals(preBills.getMeterType()))
-                .reduce(0,(x,y)-> {
+        commonGasAmount = commonOwnersPreBills().stream()
+                .filter(preliminaryBills -> "Газовый".equals(preliminaryBills.getMeterType()))
+                .reduce(0, (x, y) -> {
                     return x + y.getAmount();
-                }, (x, y)->x+y);
+                }, (x, y) -> x + y);
         return commonGasAmount;
     }
 
-
-
-
-
-    int calculateCommonGasAmount() {
-        for (int i = 0; i < preBills.size(); i++) {
-            PreBill prebill = preBills.get(i);
-            boolean status = prebill.isStatus();
-            String type = prebill.getMeterType();
-
-            if (status && type.equals("Газовый")) {
-                commonGasAmount = amountCalculator(prebill.getCurrentData(), prebill.getPreviousData());
-                break;
-            }
-
-        }
-        return commonGasAmount;
-    }
-
-    int calculateCommonElectricityAmount() {
-        for (int i = 0; i < preBills.size(); i++) {
-            PreBill prebill = preBills.get(i);
-            boolean status = prebill.isStatus();
-            String type = prebill.getMeterType();
-
-            if (status && type.equals("Электрический")) {
-                commonElectricityAmount = amountCalculator(prebill.getCurrentData(), prebill.getPreviousData());
-                break;
-            }
-        }
+    public int getCommonElectricityAmount() {
+        commonElectricityAmount = commonOwnersPreBills().stream()
+                .filter(preliminaryBills -> "Электрический".equals(preliminaryBills.getMeterType()))
+                .reduce(0, (x, y) -> {
+                    return x + y.getAmount();
+                }, (x, y) -> x + y);
         return commonElectricityAmount;
     }
-//    Stream<Phone> phoneStream = Stream.of(new Phone("iPhone 6 S", 54000),
-//            new Phone("Lumia 950", 45000),
-//            new Phone("Samsung Galaxy S 6", 40000),
-//            new Phone("LG G 4", 32000));
-//
-//    int sum = phoneStream.reduce(0,
-//            (x,y)-> {
-//                if(y.getPrice()<50000)
-//                    return x + y.getPrice();
-//                else
-//                    return x + 0;
-//            },
-//            (x, y)->x+y);
-//
-//System.out.println(sum); // 117000
 
-    //
+public int privateElectricityAmountsSumCalculator (){
+    sumOfPrivateElectricityAmounts = privateOwnersPreBills().stream()
+            .reduce(0, (x, y) -> {
+                return x + y.getAmount();
+            }, (x, y) -> x + y);
+    return sumOfPrivateElectricityAmounts;
+}
+
+
     int amountCalculator(int current, int previous) {
         return current - previous;
     }
@@ -198,9 +167,8 @@ public class PreBillCreator implements PreBillCreatorInterface {
         return Math.round(commonGasAmount * share);
     }
 
-    int privateElecrticityAmountCalculator() {
-
-        return 0;
+    int privateElecrticityAmountCalculator(int meterAmount, int sum, int commonElectricityAmount,float share) {
+        return Math.round(meterAmount + (commonElectricityAmount - sum) * share);
     }
 
 }

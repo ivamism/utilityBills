@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @ToString
 @Service
 
-public class PreBill {
+public class PreliminaryBill {
 
     //    private String name;
     private int currentData;
