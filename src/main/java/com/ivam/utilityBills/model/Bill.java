@@ -22,8 +22,6 @@ public class Bill {
 
     private String name;
 
-
-
     private int gasAmount;
     private int gasCost;
 
