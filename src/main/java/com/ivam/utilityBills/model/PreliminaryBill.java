@@ -13,13 +13,11 @@ import org.springframework.stereotype.Service;
 
 public class PreliminaryBill {
 
-    //    private String name;
+    private String name;
     private int currentData;
     private int previousData;
     private boolean status;
     private String meterType;
     private int amount;
     private float tariff;
-//    private int cost;
-
 }

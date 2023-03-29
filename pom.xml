@@ -61,16 +61,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot -->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot</artifactId>-->
-<!--			<version>2.7.1</version>-->
-<!--		</dependency>-->
-
-
-
 	</dependencies>
 
 	<build>
@@ -78,8 +68,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-<!--				<artifactId>spring-boot</artifactId>-->
-<!--				<version>2.7.1</version>-->
 			</plugin>
 		</plugins>
 	</build>

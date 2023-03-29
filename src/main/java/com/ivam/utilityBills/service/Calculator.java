@@ -9,7 +9,9 @@ import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,17 +82,18 @@ public class Calculator implements CalculatorInterface {
         return previousMeterDataList.get(id).getMeter().getName();
     }
 
-//    public String getMeterDataName(int id) {
-//        String meterName = getCurrentMeterName(id);
-//        Date verificationDate = currentCheckDate.getVerificationDate();
-//        SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
-//        String dateForName = format.format(verificationDate);
-//        return meterName + " - " + dateForName;
-//    }
+    public String getOwnerName(int id) {
+        String ownerName = currentMetersDataList.get(id).getMeter().getOwner().getName();
+        Date verificationDate = currentCheckDate.getVerificationDate();
+        SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
+        String dateForName = format.format(verificationDate);
+        return ownerName + " - " + dateForName;
+    }
 
     //    Method create a List of preliminary bills for each meter, which prepare data for final bills for each owner
     List<PreliminaryBill> preBillListCreator() {
         for (int i = 0; i < currentMetersDataList.size(); i++) {
+            String name = getOwnerName(i);
             int currentValue = currentMetersDataList.get(i).getValue();
             String type = currentMetersDataList.get(i).getMeter().getMetertype().getName();
             float tariff = currentMetersDataList.get(i).getMeter().getMetertype().getTariff().getValue();
@@ -106,6 +109,7 @@ public class Calculator implements CalculatorInterface {
             }
 
             PreliminaryBill preliminaryBill = new PreliminaryBill();
+            preliminaryBill.setName(name);
             preliminaryBill.setMeterType(type);
             preliminaryBill.setTariff(tariff);
             preliminaryBill.setCurrentData(currentValue);
@@ -118,7 +122,7 @@ public class Calculator implements CalculatorInterface {
         return preliminaryBills;
     }
 
-//separate prebills List for common and for private owners Lists
+//separate preliminary bills List for common and for private owners Lists
 
     List<PreliminaryBill> commonOwnersPreBills() {
         return preliminaryBills.stream().filter(preliminaryBills -> preliminaryBills.isStatus())
@@ -129,7 +133,6 @@ public class Calculator implements CalculatorInterface {
         return preliminaryBills.stream().filter(preliminaryBills -> !preliminaryBills.isStatus())
                 .collect(Collectors.toList());
     }
-
 
     public int getCommonGasAmount() {
         commonGasAmount = commonOwnersPreBills().stream()
@@ -156,6 +159,8 @@ public int privateElectricityAmountsSumCalculator (){
             }, (x, y) -> x + y);
     return sumOfPrivateElectricityAmounts;
 }
+
+
 
 
     int amountCalculator(int current, int previous) {
